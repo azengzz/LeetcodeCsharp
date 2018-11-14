@@ -55,6 +55,7 @@
     <Compile Include="Simples\T69_MySqrtTests.cs" />
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />
+    <Compile Include="Simples\T88_MergeSortedArraysTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leetcode\Leetcode.csproj">
