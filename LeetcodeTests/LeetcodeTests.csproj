@@ -52,10 +52,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simples\T100_SameTreeTests.cs" />
+    <Compile Include="Simples\T101_SymmetricTreeTests.cs" />
     <Compile Include="Simples\T69_MySqrtTests.cs" />
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />
     <Compile Include="Simples\T88_MergeSortedArraysTests.cs" />
+    <Compile Include="TreeHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Leetcode\Leetcode.csproj">

@@ -46,6 +46,8 @@
     <Compile Include="DataStructures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simples\T100_SameTree.cs" />
+    <Compile Include="Simples\T101_SymmetricTree.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />
