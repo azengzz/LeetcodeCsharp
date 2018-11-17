@@ -95,7 +95,7 @@ namespace Leetcode
          */
         public static TreeNode CreateBinaryTreeByArray(object[] arr)
         {
-            if (arr == null) return null;
+            if (arr == null || arr.Length == 0) return null;
 
             TreeNode root = new TreeNode((int)arr[0]);
             List<TreeNode> nodes = new List<TreeNode>();

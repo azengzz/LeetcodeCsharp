@@ -66,5 +66,43 @@ namespace Leetcode.Simples
             PreOrderRightFirst(tree.right, list);
             PreOrderRightFirst(tree.left, list);
         }
+
+        /*
+         官方的递归解法
+        public bool example(TreeNode root)
+        {
+            return isMirror(root, root);
+        }
+
+        private bool isMirror(TreeNode t1, TreeNode t2)
+        {
+            if (t1 == null && t2 == null) return true;
+            if (t1 == null || t2 == null) return false;
+            return (t1.val == t2.val) && (isMirror(t1.right, t2.left)) && (isMirror(t1.left, t2.right));
+        }
+        */
+
+        /*
+         官方提供的迭代解法：类似广度优先算法那样，使用队列
+        public bool example(TreeNode root)
+        {
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+            queue.Enqueue(root);
+            while (queue.Count != 0)
+            {
+                TreeNode t1 = queue.Dequeue();
+                TreeNode t2 = queue.Dequeue();
+                if (t1 == null && t2 == null) continue;
+                if (t2 == null || t2 == null) return false;
+                if (t1.val != t2.val) return false;
+                queue.Enqueue(t1.left);
+                queue.Enqueue(t2.right);
+                queue.Enqueue(t1.right);
+                queue.Enqueue(t2.left);
+            }
+            return true;
+        }
+        */
     }
 }
