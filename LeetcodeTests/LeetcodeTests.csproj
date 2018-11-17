@@ -56,6 +56,8 @@
     <Compile Include="Simples\T101_SymmetricTreeTests.cs" />
     <Compile Include="Simples\T104_BinaryTreeDepthTests.cs" />
     <Compile Include="Simples\T107_TreeLevelOrderTests.cs" />
+    <Compile Include="Simples\T108_BinarySearchTreeTests.cs" />
+    <Compile Include="Simples\T110_BalancedBinaryTreeTests.cs" />
     <Compile Include="Simples\T69_MySqrtTests.cs" />
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />

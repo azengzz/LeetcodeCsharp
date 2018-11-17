@@ -50,6 +50,8 @@
     <Compile Include="Simples\T101_SymmetricTree.cs" />
     <Compile Include="Simples\T104_BinaryTreeDepth.cs" />
     <Compile Include="Simples\T107_TreeLevelOrder.cs" />
+    <Compile Include="Simples\T108_BinarySearchTree.cs" />
+    <Compile Include="Simples\T110_BalancedBinaryTree.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />

@@ -62,5 +62,57 @@ namespace Leetcode.Simples.Tests
             int result = t104.MaxDepth(tree);
             Assert.IsTrue(expect == result);
         }
+
+        //--------------------------------
+
+        [TestMethod()]
+        public void MinDepthTest_1()
+        {
+            object[] nodes = { 3, 9, 20, null, null, 15, 7 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            int expect = 2;
+            int result = t104.MinDepth(tree);
+            Assert.IsTrue(expect == result);
+        }
+
+        [TestMethod()]
+        public void MinDepthTest_2()
+        {
+            object[] nodes = { 3,null,20,null,7 };   //只有单侧有值的二叉树
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            int expect = 3;
+            int result = t104.MinDepth(tree);
+            Assert.IsTrue(expect == result);
+        }
+
+        [TestMethod()]
+        public void MinDepthTest_3()
+        {
+            object[] nodes = { 1, 2, 2, 3, null, null, 3, 4, null, null, 4 };    //对称树
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            int expect = 4;
+            int result = t104.MinDepth(tree);
+            Assert.IsTrue(expect == result);
+        }
+
+        [TestMethod()]
+        public void MinDepthTest_4()
+        {
+            object[] nodes = { 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            int expect = 1;
+            int result = t104.MinDepth(tree);
+            Assert.IsTrue(expect == result);
+        }
+
+        [TestMethod()]
+        public void MinDepthTest_5()
+        {
+            object[] nodes = null;
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            int expect = 0;
+            int result = t104.MinDepth(tree);
+            Assert.IsTrue(expect == result);
+        }
     }
 }

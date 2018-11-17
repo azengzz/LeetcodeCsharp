@@ -48,5 +48,23 @@ namespace Leetcode.Simples
             return max_depth;
             */
         }
+
+        /*
+           T110，找出二叉树的最小深度。
+           最小深度即根到离它最近的叶子的路径上的节点个数。
+           Tip：如果有一边的子树为空，则只需关注另一边的子树即可
+         */
+        public int MinDepth(TreeNode root)
+        {
+            if (root == null) return 0;
+
+            if (root.left == null && root.right == null) return 1;
+            if (root.left == null) return MinDepth(root.right) + 1;
+            if (root.right == null) return MinDepth(root.left) + 1;
+
+            int leftDepth = MinDepth(root.left);
+            int rightDepth = MinDepth(root.right);
+            return leftDepth < rightDepth ? leftDepth + 1 : rightDepth + 1;
+        }
     }
 }

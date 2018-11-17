@@ -57,6 +57,7 @@ namespace Leetcode
          */
         public static bool CompareArrays(int[] arr1, int[] arr2)
         {
+            if (arr1 == null && arr2 == null) return true;
             if (arr1.Length != arr2.Length) return false;
             for (int i = 0; i < arr1.Length; i++)
             {
@@ -67,6 +68,7 @@ namespace Leetcode
 
         public static bool CompareArrays<T>(T[] arr1, T[] arr2)
         {
+            if (arr1 == null && arr2 == null) return true;
             if (arr1.Length != arr2.Length) return false;
 
             for (int i = 0; i < arr1.Length; i++)
