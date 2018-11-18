@@ -52,6 +52,8 @@
     <Compile Include="Simples\T107_TreeLevelOrder.cs" />
     <Compile Include="Simples\T108_BinarySearchTree.cs" />
     <Compile Include="Simples\T110_BalancedBinaryTree.cs" />
+    <Compile Include="Simples\T118_PascalTraingle.cs" />
+    <Compile Include="Simples\T121_StockBuySell.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />

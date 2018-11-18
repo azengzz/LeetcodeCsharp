@@ -78,7 +78,7 @@ namespace Leetcode.Simples.Tests
         [TestMethod()]
         public void MinDepthTest_2()
         {
-            object[] nodes = { 3,null,20,null,7 };   //只有单侧有值的二叉树
+            object[] nodes = { 3, null, 20, null, 7 };   //只有单侧有值的二叉树
             TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
             int expect = 3;
             int result = t104.MinDepth(tree);
@@ -113,6 +113,88 @@ namespace Leetcode.Simples.Tests
             int expect = 0;
             int result = t104.MinDepth(tree);
             Assert.IsTrue(expect == result);
+        }
+
+        //--------------------------------
+
+        [TestMethod()]
+        public void HasPathSumTest_1()
+        {
+            object[] nodes = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(true == t104.HasPathSum(tree, 22));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_2()
+        {
+            object[] nodes = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(false == t104.HasPathSum(tree, 23));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_3()
+        {
+            object[] nodes = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(true == t104.HasPathSum(tree, 26));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_4()
+        {
+            object[] nodes = { 5 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(true == t104.HasPathSum(tree, 5));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_5()
+        {
+            object[] nodes = { 5 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(false == t104.HasPathSum(tree, 6));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_6_emptyTree()
+        {
+            object[] nodes = null;
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(false == t104.HasPathSum(tree, 0));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_7()
+        {
+            object[] nodes = { 1, 2 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(false == t104.HasPathSum(tree, 1));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_8()    //在到达叶子之前，和已经和目标相等
+        {
+            object[] nodes = { 5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(false == t104.HasPathSum(tree, 20));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_9()    //在到达叶子之前，和已经和目标相等，但是其他路径有根到叶子的和刚好和目标相等
+        {
+            object[] nodes = { 5, 4, 8, 9, null, 13, 4, 7, 2, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(true == t104.HasPathSum(tree, 18));
+        }
+
+        [TestMethod()]
+        public void HasPathSumTest_10()   
+        {
+            object[] nodes = { 5, 4, 8, 9, null, 13, 4, 7, null, null, null, null, 1 };
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(nodes);
+            Assert.IsTrue(true == t104.HasPathSum(tree, 18));
         }
     }
 }

@@ -13,21 +13,21 @@ namespace Leetcode.Simples.Tests
     {
         T107_TreeLevelOrder t107 = new T107_TreeLevelOrder();
 
-        private bool CompareListList(IList<IList<int>> expect, IList<IList<int>> result)
-        {
-            if (expect.Count != result.Count) return false;
+        //private bool CompareListList(IList<IList<int>> expect, IList<IList<int>> result)
+        //{
+        //    if (expect.Count != result.Count) return false;
 
-            for (int i = 0; i < result.Count; i++)
-            {
-                if (expect[i].Count != result[i].Count) return false;
-                for (int j = 0; j < result[i].Count; j++)
-                {
-                    if (result[i][j] != expect[i][j]) return false;
-                }
-            }
+        //    for (int i = 0; i < result.Count; i++)
+        //    {
+        //        if (expect[i].Count != result[i].Count) return false;
+        //        for (int j = 0; j < result[i].Count; j++)
+        //        {
+        //            if (result[i][j] != expect[i][j]) return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         [TestMethod()]
         public void LevelOrderBottomTest_1()
@@ -37,7 +37,7 @@ namespace Leetcode.Simples.Tests
             IList<IList<int>> result = t107.LevelOrderBottom(tree);
             IList<IList<int>> expect = new List<IList<int>>(){ new List<int>{ 15, 7 }, new List<int>{ 9, 20 }, new List<int>{ 3 } };
 
-            Assert.IsTrue(CompareListList(expect, result));
+            Assert.IsTrue(CompareHelper.CompareListList(expect, result));
         }
 
         [TestMethod()]
@@ -48,7 +48,7 @@ namespace Leetcode.Simples.Tests
             IList<IList<int>> result = t107.LevelOrderBottom(tree);
             IList<IList<int>> expect = new List<IList<int>>() { new List<int> { 11 }, new List<int> { 8,9,10 }, new List<int> { 4,5,6,7 }, new List<int> { 2,3}, new List<int> { 1 } };
 
-            Assert.IsTrue(CompareListList(expect, result));
+            Assert.IsTrue(CompareHelper.CompareListList(expect, result));
         }
 
         [TestMethod()]
@@ -59,7 +59,7 @@ namespace Leetcode.Simples.Tests
             IList<IList<int>> result = t107.LevelOrderBottom(tree);
             IList<IList<int>> expect = new List<IList<int>>() { new List<int> { 5 }, new List<int> { 4 }, new List<int> { 3 }, new List<int> { 2 }, new List<int> { 1 } };
 
-            Assert.IsTrue(CompareListList(expect, result));
+            Assert.IsTrue(CompareHelper.CompareListList(expect, result));
         }
 
         [TestMethod()]
@@ -70,7 +70,7 @@ namespace Leetcode.Simples.Tests
             IList<IList<int>> result = t107.LevelOrderBottom(tree);
             IList<IList<int>> expect = new List<IList<int>>() { new List<int> { 1 } };
 
-            Assert.IsTrue(CompareListList(expect, result));
+            Assert.IsTrue(CompareHelper.CompareListList(expect, result));
         }
 
         [TestMethod()]
@@ -81,7 +81,7 @@ namespace Leetcode.Simples.Tests
             IList<IList<int>> result = t107.LevelOrderBottom(tree);
             IList<IList<int>> expect = new List<IList<int>>() ;
 
-            Assert.IsTrue(CompareListList(expect, result));
+            Assert.IsTrue(CompareHelper.CompareListList(expect, result));
         }
     }
 }
