@@ -54,6 +54,10 @@
     <Compile Include="Simples\T110_BalancedBinaryTree.cs" />
     <Compile Include="Simples\T118_PascalTraingle.cs" />
     <Compile Include="Simples\T121_StockBuySell.cs" />
+    <Compile Include="Simples\T136_SingleNumber.cs" />
+    <Compile Include="Simples\T141_LinkedListCircle.cs" />
+    <Compile Include="Simples\T155_MinStack.cs" />
+    <Compile Include="Simples\T168_SomeMathProblems.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />

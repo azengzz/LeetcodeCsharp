@@ -174,4 +174,33 @@ namespace Leetcode
             PreOrderGetElements(tree.right, list);
         }
     }
+
+    // 单向链表节点定义
+    public class SingleListNode
+    {
+        public int val;
+        public SingleListNode next;
+        public SingleListNode(int x)
+        {
+            val = x;
+            next = null;
+        }
+    }
+
+    public class LinkedListHelper
+    {
+        public static SingleListNode CreateSingleListedListByArray(int[] elements)
+        {
+            if (elements == null) return null;
+
+            SingleListNode ptr = new SingleListNode(elements[0]);
+            SingleListNode head = ptr;
+            for (int i = 1; i < elements.Length; i++)
+            {
+                ptr.next = new SingleListNode(elements[i]);
+                ptr = ptr.next;
+            }
+            return head;
+        }
+    }
 }

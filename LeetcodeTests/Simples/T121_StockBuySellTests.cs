@@ -17,7 +17,7 @@ namespace Leetcode.Simples.Tests
         public void MaxProfitTest_1()
         {
             int[] prices = { 7, 1, 5, 3, 6, 4 };
-            Assert.IsTrue(5 ==  t121.MaxProfit(prices));
+            Assert.IsTrue(5 == t121.MaxProfit(prices));
         }
 
         [TestMethod()]
@@ -60,6 +60,42 @@ namespace Leetcode.Simples.Tests
         {
             int[] prices = { 1, 2, 4 };
             Assert.IsTrue(3 == t121.MaxProfit(prices));
+        }
+
+        //----------------------------------------------------------------
+        [TestMethod()]
+        public void MaxProfit_MultipleTransactionsTest_1()
+        {
+            int[] prices = { 7, 1, 5, 3, 6, 4 };
+            Assert.IsTrue(7 == t121.MaxProfit_MultipleTransactions(prices));
+        }
+
+        [TestMethod()]
+        public void MaxProfit_MultipleTransactionsTest_2()
+        {
+            int[] prices = { 1, 2, 3, 4, 5 };
+            Assert.IsTrue(4 == t121.MaxProfit_MultipleTransactions(prices));
+        }
+
+        [TestMethod()]
+        public void MaxProfit_MultipleTransactionsTest_3()
+        {
+            int[] prices = { 6, 5, 4, 3, 2, 1 };
+            Assert.IsTrue(0 == t121.MaxProfit_MultipleTransactions(prices));
+        }
+
+        [TestMethod()]
+        public void MaxProfit_MultipleTransactionsTest_4()
+        {
+            int[] prices = { 2, 4, 1 };
+            Assert.IsTrue(2 == t121.MaxProfit_MultipleTransactions(prices));
+        }
+
+        [TestMethod()]
+        public void MaxProfit_MultipleTransactionsTest_5()
+        {
+            int[] prices = null;
+            Assert.IsTrue(0 == t121.MaxProfit_MultipleTransactions(prices));
         }
     }
 }
