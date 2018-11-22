@@ -64,6 +64,7 @@
     <Compile Include="Simples\T141_LinkedListCircleTests.cs" />
     <Compile Include="Simples\T155_MinStackTests.cs" />
     <Compile Include="Simples\T168_SomeMathProblemsTests.cs" />
+    <Compile Include="Simples\T190_SomeMathProblemsTests.cs" />
     <Compile Include="Simples\T69_MySqrtTests.cs" />
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />

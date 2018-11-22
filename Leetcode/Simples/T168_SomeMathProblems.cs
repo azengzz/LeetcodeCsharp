@@ -133,5 +133,29 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T189 旋转数组。给定一个数组，将数组中的元素向右移动K个位置，其中K为非负数。要求使用空间复杂度为O(1)的原地算法
+
+        public void Rotate(int[] nums, int k)
+        {
+            if (nums.Length < 2) return;
+
+            k %= nums.Length;
+            Reverse(nums, 0, nums.Length - 1);
+            Reverse(nums, 0, k - 1);
+            Reverse(nums, k, nums.Length - 1);
+        }
+
+        private void Reverse(int[] nums, int start, int end)
+        {
+            while (start < end)
+            {
+                nums[start] += nums[end];
+                nums[end] = nums[start] - nums[end];
+                nums[start] = nums[start++] - nums[end--];
+            }
+        }
+
+        #endregion
     }
 }
