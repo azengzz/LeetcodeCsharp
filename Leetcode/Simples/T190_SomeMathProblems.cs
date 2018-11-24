@@ -75,5 +75,163 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T196 House Robber
+
+        public int Rob(int[] nums)
+        {
+            int currentMax = 0;    //当前最大值
+            int lastMax = 0;    //上次最大值
+
+            if (nums.Length <= 1) return nums.Length == 0 ? 0 : nums[0];
+
+            currentMax = nums[0] > nums[1] ? nums[0] : nums[1];
+            lastMax = nums[0];
+            for (int i = 2; i < nums.Length; i++)
+            {
+                int tmp = currentMax;
+                int now = nums[i] + lastMax;
+                currentMax = now > currentMax ? now : currentMax;
+                lastMax = tmp;
+            }
+
+            return currentMax;
+        }
+
+        #endregion
+
+        #region T202 快乐数
+
+        public bool IsHappy(int n)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+
+            while (n != 1)
+            {
+                if (dict.ContainsKey(n))
+                    return false;
+                dict.Add(n, 1);
+                int ans = 0;
+                int remaind = 0;
+                while (n != 0)
+                {
+                    remaind = n % 10;
+                    n /= 10;
+                    ans += remaind * remaind;
+                }
+                n = ans;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region T203 移出链表元素
+
+        public ListNode RemoveElements(ListNode head, int val)
+        {
+            ListNode ptr = head;
+
+            while (ptr != null)
+            {
+                if (head.val == val)
+                {
+                    head = head.next;
+                    ptr = head;
+                    continue;
+                }
+                if (ptr.next != null && ptr.next.val == val)
+                {
+                    ptr.next = ptr.next.next;
+                }
+                else
+                {
+                    ptr = ptr.next;
+                }                
+            }
+            return head;
+        }
+
+        #endregion
+
+        #region T204 计数质数
+
+        public int CountPrimes(int n)
+        {
+            int count = 0;
+            for (int i = 2; i < n; i++)
+            {
+                int j, tmp = 0;
+                for (j = 2; j * j <= i; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        tmp += 1;
+                        break;
+                    }
+                }
+                if (tmp == 0) count++;
+            }
+            return count;
+        }
+
+        #endregion
+
+        #region T205 同构字符串
+
+        public bool IsIsomorphic(string s, string t)
+        {
+            if (s == null || t == null) return false;
+            if (s.Length != t.Length) return false;
+
+            Dictionary<char, char> charsDict = new Dictionary<char, char>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (charsDict.ContainsKey(s[i]))
+                {
+                    char existedVal = charsDict[s[i]];
+                    if (t[i] != existedVal)
+                        return false;
+                }
+                else if (charsDict.ContainsValue(t[i]))
+                {
+                    var collect = from d in charsDict where d.Value == t[i] select d.Key;
+                    char existtedKey = collect.ToList<char>()[0];
+                    if (existtedKey != s[i])
+                        return false;
+                }
+                else
+                {
+                    charsDict.Add(s[i], t[i]);
+                }
+
+            }
+            return true;
+        }
+
+        #endregion
+
+        #region T206 反转链表
+
+        public ListNode ReverseList(ListNode head)
+        {
+            if (head == null) return head;
+
+            ListNode ptrA = null;
+            ListNode ptrB = head;
+
+            while (head.next != null)
+            {
+                ptrB = head;
+                head = head.next;
+                ptrB.next = ptrA;
+                ptrA = ptrB;
+            }
+            head.next = ptrB;
+            return head;
+        }
+
+        #endregion
     }
 }
