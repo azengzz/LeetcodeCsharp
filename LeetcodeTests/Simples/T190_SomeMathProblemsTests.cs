@@ -226,5 +226,106 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T217 tests : 判断数组中是否有重复元素
+
+        [TestMethod()]
+        public void ContainsDuplicateTest_1()
+        {
+            int[] nums = { 1, 2, 3, 1 };
+            Assert.IsTrue(true == t190.ContainsDuplicate(nums));
+        }
+
+        [TestMethod()]
+        public void ContainsDuplicateTest_2()
+        {
+            int[] nums = { 1, 2, 3, 4 };
+            Assert.IsTrue(false == t190.ContainsDuplicate(nums));
+        }
+
+        [TestMethod()]
+        public void ContainsDuplicateTest_3()
+        {
+            int[] nums = { 1 };
+            Assert.IsTrue(false == t190.ContainsDuplicate(nums));
+        }
+
+        #endregion
+
+        #region T219 tests : 判断是否存在重复元素，且下标之差最大为k
+
+        [TestMethod()]
+        public void ContainsNearbyDuplicateTest_1()
+        {
+            int[] nums = { 1, 2, 3, 1 };
+            Assert.IsTrue(true == t190.ContainsNearbyDuplicate(nums, 3));
+        }
+
+        [TestMethod()]
+        public void ContainsNearbyDuplicateTest_2()
+        {
+            int[] nums = { 1, 0, 1, 1 };
+            Assert.IsTrue(true == t190.ContainsNearbyDuplicate(nums, 1));
+        }
+
+        [TestMethod()]
+        public void ContainsNearbyDuplicateTest_3()
+        {
+            int[] nums = { 1, 2, 3, 1, 2, 3 };
+            Assert.IsTrue(false == t190.ContainsNearbyDuplicate(nums, 2));
+        }
+
+        [TestMethod()]
+        public void ContainsNearbyDuplicateTest_4()
+        {
+            int[] nums = { 2, 2, 0, 0, 2, 2 };
+            Assert.IsTrue(true == t190.ContainsNearbyDuplicate(nums, 2));
+        }
+
+        #endregion
+
+        #region T234 tests : 回文链表
+
+        [TestMethod()]
+        public void IsPalindromeTest_1()
+        {
+            int[] nodes = { 1, 2, 3, 4, 3, 2, 1 };
+            ListNode head = ListNodeHelper.CreateLinkedListByArray(nodes);
+            Assert.IsTrue(true == t190.IsPalindrome(head));
+        }
+
+        [TestMethod()]
+        public void IsPalindromeTest_2()
+        {
+            int[] nodes = { 1, 2, 3, 4, 5, 5, 4, 3, 2, 1 };
+            ListNode head = ListNodeHelper.CreateLinkedListByArray(nodes);
+            Assert.IsTrue(true == t190.IsPalindrome(head));
+        }
+
+        [TestMethod()]
+        public void IsPalindromeTest_3()
+        {
+            int[] nodes = { 1, 2, 2, 1 };
+            ListNode head = ListNodeHelper.CreateLinkedListByArray(nodes);
+            Assert.IsTrue(true == t190.IsPalindrome(head));
+        }
+
+        [TestMethod()]
+        public void IsPalindromeTest_4()
+        {
+            int[] nodes = { 1, 2, 1 };
+            ListNode head = ListNodeHelper.CreateLinkedListByArray(nodes);
+            Assert.IsTrue(true == t190.IsPalindrome(head));
+        }
+
+        [TestMethod()]
+        public void IsPalindromeTest_5()
+        {
+            int[] nodes = { 1, 2, 3, 4, 5, 3, 2, 1 };
+            ListNode head = ListNodeHelper.CreateLinkedListByArray(nodes);
+            Assert.IsTrue(false == t190.IsPalindrome(head));
+        }
+
+        #endregion
     }
 }

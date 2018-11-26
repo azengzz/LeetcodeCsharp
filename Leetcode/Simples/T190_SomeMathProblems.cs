@@ -233,5 +233,148 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T217 判断数组是否存在重复元素
+
+        public bool ContainsDuplicate(int[] nums)
+        {
+            //先排序的做法------------------------------------------------
+            //if (nums == null || nums.Length == 0) return false;
+
+            //Array.Sort(nums);
+            //for (int i = 0; i < nums.Length - 1; i++)
+            //{
+            //    if (nums[i] == nums[i + 1]) return true;
+            //}
+            //return false;
+
+            //使用字典-------------------------------------------------
+            if (nums == null || nums.Length == 0) return false;
+
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!dict.ContainsKey(nums[i]))
+                {
+                    dict.Add(nums[i], 1);
+                }
+                else return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region T219 判断数组中是否存在重复元素，且它们下标绝对值之差最大为K
+
+        public bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            //注意是“索引的绝对值之差”
+            if (nums == null || nums.Length < 2) return false;
+
+            Dictionary<int, List<int>> dict = new Dictionary<int, List<int>>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!dict.ContainsKey(nums[i]))
+                {
+                    dict.Add(nums[i], new List<int> { i });
+                }
+                else
+                {
+                    if (true == diff(dict[nums[i]], i, k)) return true;
+                    dict[nums[i]].Add(i);
+                }
+            }
+            return false;
+        }
+
+        private bool diff(List<int> list, int newVal, int expect)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if ((newVal - list[i] <= expect) 
+                || (list[i] - newVal >= expect * (-1))) return true; 
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region T231 2的幂次方
+
+        public bool IsPowerOfTwo(int n)
+        {
+            if (n <= 0) return false;
+
+            while (n > 1)
+            {
+                if (n % 2 != 0) return false;
+                n /= 2;
+            }
+            return true;
+        }
+
+        //优秀的解答
+        //public bool IsPowerOfTwo(int n)
+        //{
+        //    if (n <= 0) return false;
+
+        //    if ((n & n - 1) == 0) return true;
+        //    return false;
+        //}
+
+        #endregion
+
+        #region T234 回文链表   
+             
+        public bool IsPalindrome(ListNode head)
+        {
+            if (head == null || head.next == null) return true;
+            if (head.next.next == null)
+            {
+                if (head.val == head.next.val) return true;
+                return false;
+            }
+            if (head.next.next.next == null)
+            {
+                if (head.val == head.next.next.val) return true;
+                return false;
+            }
+
+            ListNode fast = head, slow = head;
+            while (fast.next != null)  //当快指针走完时，慢指针走到链表中间位置
+            {
+                fast = fast.next;    //先走一步
+                if (fast.next != null)
+                {
+                    fast = fast.next;
+                    slow = slow.next;
+                }                
+            }
+
+            ListNode reverseHead = slow.next;
+            reverseHead = ReverseList(reverseHead);    //t206题反转链表
+            ListNode reverse = reverseHead;
+
+            fast = head;
+            bool flag = true;
+            while (reverse != null)    //比较
+            {
+                if (fast.val != reverse.val)
+                {
+                    flag = false;
+                    break;
+                }
+                fast = fast.next;
+                reverse = reverse.next;
+            }
+            slow.next = ReverseList(reverseHead);    //再翻转回来
+
+            return flag;
+        }
+
+        #endregion
+
+
     }
 }
