@@ -312,5 +312,64 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T303 定义一个类及类方法SumRange，它用来计算数组索引范围i到j的累加和（i <= j）。且SumRange方法会多次调用
+        //难点在于，直接累加的方式，遇到巨量的数据和巨多次的函数调用时，时间会超出限制
+        public class NumArray
+        {
+            private int[] sums;
+
+            public NumArray(int[] nums)
+            {
+                sums = new int[nums.Length];
+                if (nums.Length == 0) return;
+                sums[0] = nums[0];
+                for (int i = 1; i < nums.Length; i++)
+                {
+                    sums[i] = sums[i - 1] + nums[i];
+                }
+            }
+
+            public int SumRange(int i, int j)
+            {
+                if (i == 0) return sums[j];
+                else return sums[j] - sums[i - 1];
+            }
+        }
+
+        #endregion
+
+        #region T326 问一个数是否是3的幂次方。不使用循环和递归来计算。
+
+        public bool IsPowerOfThree(int n)
+        {
+            return (n > 0 && (int)(Math.Log10(n) / Math.Log10(3)) - Math.Log10(n) / Math.Log10(3) == 0);
+        }
+
+        #endregion
+
+        #region T342 问一个数是不是4的幂次方。不使用循环或递归来计算
+
+        public bool IsPowerOfFour(int num)
+        {
+            if (num < 1) return false;
+            return ((num & (num - 1)) == 0 && (0x55555555 & num) != 0);            
+        }
+
+        #endregion
+
+        #region T344 反转字符串 （首尾颠倒）
+
+        public string ReverseString(string s)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                sb.Append(s[i]);
+            }
+            return sb.ToString();
+        }
+
+        #endregion
     }
 }

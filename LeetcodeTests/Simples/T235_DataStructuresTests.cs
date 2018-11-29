@@ -209,7 +209,7 @@ namespace Leetcode.Simples.Tests
 
         #endregion
 
-        #region tests : 判断字符串str是否符合模式pattern
+        #region T290 tests : 判断字符串str是否符合模式pattern
 
         [TestMethod()]
         public void WordPatternTest_1()
@@ -241,6 +241,46 @@ namespace Leetcode.Simples.Tests
             string str = "dog dog dog dog";
             string pattern = "abba";
             Assert.IsTrue(false == t235.WordPattern(pattern, str));
+        }
+
+        #endregion
+
+        #region T326 tests : 判断一个数是否是3的幂次方
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_1()
+        {
+            Assert.IsTrue(true == t235.IsPowerOfThree(3));
+        }
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_2()
+        {
+            Assert.IsTrue(false == t235.IsPowerOfThree(4));
+        }
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_3()
+        {
+            Assert.IsTrue(true == t235.IsPowerOfThree(243));     //对于使用求对数的方案，使用243这个数字测试比较重要
+        }
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_4()
+        {
+            Assert.IsTrue(true == t235.IsPowerOfThree(1));
+        }
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_5()
+        {
+            Assert.IsTrue(false == t235.IsPowerOfThree(0));
+        }
+
+        [TestMethod()]
+        public void IsPowerOfThreeTest_6()
+        {
+            Assert.IsTrue(false == t235.IsPowerOfThree(-9));
         }
 
         #endregion
