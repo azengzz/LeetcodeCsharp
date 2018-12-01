@@ -61,6 +61,7 @@
     <Compile Include="Simples\T190_SomeMathProblems.cs" />
     <Compile Include="Simples\T225_MyStackUsingQueue.cs" />
     <Compile Include="Simples\T235_DataStructures.cs" />
+    <Compile Include="Simples\T349_MathProblems.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />

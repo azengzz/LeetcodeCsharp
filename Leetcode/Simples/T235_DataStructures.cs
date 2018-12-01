@@ -371,5 +371,49 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T345 反转字符串中的元音字母
+
+        public string ReverseVowels(string s)
+        {
+            char[] cs = s.ToCharArray();
+            int front = 0, rear = cs.Length - 1;
+
+            while (front < rear)
+            {
+                if (IsVowels(cs[front]) && IsVowels(cs[rear]))
+                {
+                    if (cs[front] != cs[rear])
+                    {
+                        cs[front] += cs[rear];
+                        cs[rear] = (char)(cs[front] - cs[rear]);
+                        cs[front] = (char)(cs[front] - cs[rear]);
+                    }
+                    front++;
+                    rear--;
+                    continue;
+                }
+                if (!IsVowels(cs[front]))
+                {
+                    front++;
+                }
+                if (!IsVowels(cs[rear]))
+                {
+                    rear--;
+                }
+            }
+            return new string(cs);
+        }
+
+        private bool IsVowels(char v)
+        {
+            if (v >= 'a' && v <= 'z')
+            {
+                return (v == 'a' || v == 'e' || v == 'i' || v == 'o' || v == 'u');
+            }
+            return (v == 'A' || v == 'E' || v == 'I' || v == 'O' || v == 'U');
+        }
+
+        #endregion
     }
 }

@@ -284,5 +284,57 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T345 tests : 反转字符串中的元音字母
+
+        [TestMethod()]
+        public void ReverseVowelsTest_1()
+        {
+            string input = "hello";
+            string expect = "holle";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        [TestMethod()]
+        public void ReverseVowelsTest_2()
+        {
+            string input = "leetcode";
+            string expect = "leotcede";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        [TestMethod()]
+        public void ReverseVowelsTest_3()
+        {
+            string input = "aaaaaaaaeeeeeee";
+            string expect = "eeeeeeeaaaaaaaa";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        [TestMethod()]
+        public void ReverseVowelsTest_4()
+        {
+            string input = "wocccccccccc";
+            string expect = "wocccccccccc";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        [TestMethod()]
+        public void ReverseVowelsTest_5()
+        {
+            string input = "wryyyyyyyyyyyy";
+            string expect = "wryyyyyyyyyyyy";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        [TestMethod()]
+        public void ReverseVowelsTest_6()
+        {
+            string input = "aA";
+            string expect = "Aa";
+            Assert.IsTrue(expect == t235.ReverseVowels(input));
+        }
+
+        #endregion
     }
 }
