@@ -159,5 +159,146 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T383 tests : 赎金信
+
+        [TestMethod()]
+        public void CanConstructTest_1()
+        {
+            Assert.IsTrue(true == t349.CanConstruct("hello", "helloworld"));
+        }
+
+        [TestMethod()]
+        public void CanConstructTest_2()
+        {
+            Assert.IsTrue(false == t349.CanConstruct("a", "b"));
+        }
+
+        [TestMethod()]
+        public void CanConstructTest_3()
+        {
+            Assert.IsTrue(false == t349.CanConstruct("aa", "ab"));
+        }
+
+        [TestMethod()]
+        public void CanConstructTest_4()
+        {
+            Assert.IsTrue(true == t349.CanConstruct("aa", "aab"));
+        }
+
+        #endregion
+
+        #region T387 tests : 求字符串中第一个唯一字符的下标
+
+        [TestMethod()]
+        public void FirstUniqCharTest_1()
+        {
+            Assert.IsTrue(0 == t349.FirstUniqChar("leetcode"));
+        }
+
+        [TestMethod()]
+        public void FirstUniqCharTest_2()
+        {
+            Assert.IsTrue(2 == t349.FirstUniqChar("loveleetcode"));
+        }
+
+        [TestMethod()]
+        public void FirstUniqCharTest_3()
+        {
+            Assert.IsTrue(-1 == t349.FirstUniqChar("leetcodeleetcode"));
+        }
+
+
+        #endregion
+
+        #region T389 tests : 找两个字符中不同的那个字符
+
+        [TestMethod()]
+        public void FindTheDifferenceTest_1()
+        {
+            Assert.IsTrue('e' == t349.FindTheDifference("abcd", "caebd"));
+        }
+
+        [TestMethod()]
+        public void FindTheDifferenceTest_2()
+        {
+            Assert.IsTrue('A' == t349.FindTheDifference("", "A"));
+        }
+
+        #endregion
+
+        #region T400 tesst : 求第N个数字
+
+        [TestMethod()]
+        public void FindNthDigitTest_1()
+        {
+            Assert.IsTrue(8 == t349.FindNthDigit(187));
+        }
+
+        [TestMethod()]
+        public void FindNthDigitTest_2()
+        {
+            Assert.IsTrue(9 == t349.FindNthDigit(2882));
+        }
+
+        [TestMethod()]
+        public void FindNthDigitTest_3()
+        {
+            Assert.IsTrue(4 == t349.FindNthDigit(114514));
+        }
+
+        [TestMethod()]
+        public void findnthdigittest_4()
+        {
+            Assert.IsTrue(2 == t349.FindNthDigit(int.MaxValue - 1));
+        }
+
+        #endregion
+
+        #region T401 tests : 二进制手表
+
+        [TestMethod()]
+        public void CreateNOnesTest_1()
+        {
+            Assert.IsTrue(null != t349.CreateNOnes(4, 1));
+        }
+
+        [TestMethod()]
+        public void CreateNOnesTest_2()
+        {
+            Assert.IsTrue(null != t349.CreateNOnes(4, 2));
+        }
+
+        [TestMethod()]
+        public void CreateNOnesTest_3()
+        {
+            Assert.IsTrue(null != t349.CreateNOnes(4, 3));
+        }
+
+        [TestMethod()]
+        public void ReadBinaryWatchTest_1()
+        {
+            Assert.IsTrue(null != t349.ReadBinaryWatch(8));
+        }
+
+        [TestMethod()]
+        public void ReadBinaryWatchTest_2()
+        {
+            Assert.IsTrue(null != t349.ReadBinaryWatch(7));
+        }
+
+        [TestMethod()]
+        public void ReadBinaryWatchTest_3()
+        {
+            Assert.IsTrue(null != t349.ReadBinaryWatch(1));
+        }
+
+        [TestMethod()]
+        public void ReadBinaryWatchTest_4()
+        {
+            Assert.IsTrue(null != t349.ReadBinaryWatch(0));
+        }
+
+        #endregion
     }
 }

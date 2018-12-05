@@ -162,5 +162,184 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T383 赎金信。 问ransomNote字符串是否全都属于magazine字符串（字符数量也要一致）。假设只包含小写字母
+
+        public bool CanConstruct(string ransomNote, string magazine)
+        {
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            CreateDictionary(dict, magazine);
+
+            Dictionary<char, int> dict2 = new Dictionary<char, int>();
+            CreateDictionary(dict2, ransomNote);
+
+            foreach (var c in dict2)
+            {
+                if (!dict.ContainsKey(c.Key) || c.Value > dict[c.Key])
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void CreateDictionary(Dictionary<char, int> dict, string str)
+        {
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (dict.ContainsKey(str[i]))
+                {
+                    dict[str[i]]++;
+                }
+                else
+                {
+                    dict.Add(str[i], 1);
+                }
+            }
+        }
+
+        #endregion
+
+        #region T387 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回-1。假设只包含小写字母
+
+        public int FirstUniqChar(string s)
+        {
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (dict.ContainsKey(s[i]))
+                {
+                    dict[s[i]]++;
+                }
+                else
+                {
+                    dict.Add(s[i], 1);
+                }
+            }
+            var colle = from d in dict where d.Value == 1 select d.Key;
+            char[] singles = colle.ToArray();
+            if (singles.Length > 0)
+            {
+                return s.IndexOf(singles[0]);
+            }
+            return -1;
+        }
+
+        #endregion
+
+        #region T389 找出两个字符串中不同的那个字母。其中t字符串包含了s字符串的所有字符，且随机重排，并有一个新元素，求那个新元素
+
+        //利用异或的特性：相同为0，相异为1，最后s和t中相同的字符异或之后为0了，剩下的就是不同的字符
+        public char FindTheDifference(string s, string t)
+        {
+            if (s == "") return t[0];
+
+            int res = s[0];
+            for(int i = 1; i < s.Length; i++)
+            {
+                res ^= s[i];
+            }
+            for (int i = 0; i < t.Length; i++)
+            {
+                res ^= t[i];
+            }
+            return (char)res;
+        }
+
+        #endregion
+
+        #region T400 在无限的整数序列中找到第n个数字
+
+        public int FindNthDigit(int n)
+        {
+            int val = n;
+            int level = 0;
+            while (level < 8)
+            {
+                int temp = 9 * (int)Math.Pow(10, level) * (level + 1);
+                if (temp >= val) break;
+                else val -= temp;
+                level++;
+            }
+
+            if (level >= 8)    //在10的8次方这个范围内的数字个数已超过整型的表达范围
+            {
+                //do nothing
+            }
+
+            int result = val / (level + 1);
+            int remaind = val % (level + 1);
+            result = result + (int)Math.Pow(10, level) - 1;
+            if (remaind > 0)
+            {
+                result += 1;
+                result /= (int)Math.Pow(10, level + 1 - remaind);
+            } 
+            return result % 10;
+        }
+
+        #endregion
+
+        #region T401 二进制手表。非负整数n代表LED亮着的数量，要求返回所有可能的时间组合
+
+        public List<int> CreateNOnes(int totalBits, int numOfOne)
+        {
+            if (numOfOne == 0) return new List<int> { 0 };
+
+            if (numOfOne == 1)
+            {
+                List<int> compare = new List<int>();
+                for (int i = 0; i < totalBits; i++)
+                {
+                    compare.Add(0x01 << i);
+                }
+                return compare;
+            }
+
+            List<int> lastList = CreateNOnes(totalBits, numOfOne - 1);
+            List<int> res = new List<int>();
+            for (int i = 0; i < totalBits; i++)
+            {
+                int num = 0x01 << i;
+                for (int j = 0; j < lastList.Count; j++)
+                {
+                    int tmp = num | lastList[j];
+                    if (!lastList.Contains(tmp) && !res.Contains(tmp))
+                    {
+                        res.Add(tmp);
+                    }
+                }
+            }
+            return res;
+        }
+
+        public IList<string> ReadBinaryWatch(int num)
+        {
+            const int MAX_HOUR_LEDS = 3;
+            const int MAX_SEC_LEDS = 5;
+
+            List<string> res = new List<string>();
+
+            for (int hourNum = 0; hourNum <= MAX_HOUR_LEDS; hourNum++)
+            {
+                if (num - hourNum < 0) break;
+                if (num - hourNum > MAX_SEC_LEDS) continue;
+                List<int> hoursColle = CreateNOnes(4, hourNum);
+                List<int> secsColle = CreateNOnes(6, num - hourNum);
+
+                foreach(var hour in hoursColle)
+                {
+                    if (hour > 11) continue;
+                    foreach(var sec in secsColle)
+                    {
+                        if (sec > 59) continue;
+                        string secStr = sec < 10 ? "0" + sec.ToString() : sec.ToString();
+                        res.Add(hour.ToString() + ":" + secStr);
+                    }
+                }
+            }
+            return res;
+        }
+
+        #endregion
     }
 }
