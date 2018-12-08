@@ -207,6 +207,74 @@ namespace Leetcode.Simples
 
         #endregion
 
+        #region T427 建立四叉树
+
+        public QuadTreeNode Construct(int[][] grid)
+        {
+            int dimension = grid[0].Length;    //维度
+            QuadTreeNode tree = null;
+
+            tree = AddQuadTreeNode(grid, 0, 0, dimension);
+
+            return tree;
+        }
+
+        private QuadTreeNode AddQuadTreeNode(int[][] grid, int row, int column, int dimension)
+        {
+            int firstVal = grid[row][column];
+            for (int i = row; i < row + dimension; i++)
+            {
+                for (int j = column; j < column + dimension; j++)
+                {
+                    if (grid[i][j] != firstVal)
+                    {
+                        QuadTreeNode node = new QuadTreeNode(true, false, null, null, null, null);
+                        node.topLeft =  AddQuadTreeNode(grid, row, column, dimension / 2);
+                        node.topRight = AddQuadTreeNode(grid, row, column + dimension / 2, dimension / 2);
+                        node.bottomLeft = AddQuadTreeNode(grid, row + dimension / 2, column, dimension / 2);
+                        node.bottomRight = AddQuadTreeNode(grid, row + dimension / 2, column + dimension / 2, dimension / 2);
+                        return node;
+                    }
+                }
+            }
+            return new QuadTreeNode(firstVal == 1, true, null, null, null, null);
+        }
+
+        #endregion
+
+        #region T429 输出N察树的层序遍历结果
+        //广度优先算法。每次出队列时，把出列节点的子节点添加进队列。只是这次的子节点是链表
+        public IList<IList<int>> LevelOrder(NTreeNode root)
+        {
+            if (root == null) return new List<IList<int>>();
+
+            Queue<IList<NTreeNode>> queue = new Queue<IList<NTreeNode>>();
+            List<IList<int>> res = new List<IList<int>>();
+
+            queue.Enqueue(new List<NTreeNode> { root });
+            while (queue.Count > 0)
+            {
+                IList<NTreeNode> nodesList = queue.Dequeue();
+                IList<NTreeNode> childrenList = new List<NTreeNode>();
+                List<int> addList = new List<int>();
+                foreach (NTreeNode node in nodesList)
+                {
+                    addList.Add(node.val);
+                    foreach (NTreeNode n in node.children)
+                    {
+                        childrenList.Add(n);
+                    }
+                }
+                if (addList.Count > 0)
+                    res.Add(addList);
+                if (childrenList.Count > 0)
+                    queue.Enqueue(childrenList);
+            }
+            return res;
+        }
+
+        #endregion
+
         #region T434 求字符串中的单词数。这里的单词指的是连续的不是空格的字符。且假设字符串中不包含不可打印字符
 
         public int CountSegments(string s)
@@ -219,6 +287,42 @@ namespace Leetcode.Simples
                 len++;
             }
             return len;
+        }
+
+        #endregion
+
+        #region T437 找出给定二叉树中路径之和等于给定数值的路径总数
+
+        public int PathSum(TreeNode root, int sum)
+        {
+            if (root == null) return 0;
+
+            int count = 0;
+            Stack<TreeNode> stk = new Stack<TreeNode>();
+            stk.Push(root);
+            while (stk.Count > 0)
+            {
+                TreeNode node = stk.Pop();
+                count += FindWith(node, sum);
+
+                if (node.right != null) stk.Push(node.right);
+                if (node.left != null) stk.Push(node.left);
+            }
+            return count;
+        }
+
+        private int FindWith(TreeNode node, int sum)
+        {
+            if (node == null) return 0;
+
+            int count = 0;
+            if (node.val == sum)
+            {
+                count++;
+            }
+            count += FindWith(node.left, sum - node.val);
+            count += FindWith(node.right, sum - node.val);
+            return count;
         }
 
         #endregion

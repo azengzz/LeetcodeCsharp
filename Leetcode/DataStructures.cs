@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Leetcode
 {
+    #region 链表
     //链表节点数据结构
     public class ListNode
     {
@@ -50,6 +51,9 @@ namespace Leetcode
         }     
     }
 
+    #endregion
+
+    #region 用于比较
     public class CompareHelper
     {
         /*
@@ -110,6 +114,10 @@ namespace Leetcode
             return true;
         }
     }
+
+    #endregion
+
+    #region 二叉树
 
     //二叉树节点数据结构
     public class TreeNode
@@ -175,6 +183,10 @@ namespace Leetcode
         }
     }
 
+    #endregion
+
+    #region 单向链表
+
     // 单向链表节点定义
     public class SingleListNode
     {
@@ -203,4 +215,49 @@ namespace Leetcode
             return head;
         }
     }
+
+    #endregion
+
+    #region 四叉树
+
+    public class QuadTreeNode
+    {
+        public bool val;
+        public bool isLeaf;
+        public QuadTreeNode topLeft;
+        public QuadTreeNode topRight;
+        public QuadTreeNode bottomLeft;
+        public QuadTreeNode bottomRight;
+
+        public QuadTreeNode() { }
+        public QuadTreeNode(bool _val, bool _isLeaf, QuadTreeNode _topLeft, QuadTreeNode _topRight, QuadTreeNode _bottomLeft,
+                            QuadTreeNode _bottomRight)
+        {
+            val = _val;
+            isLeaf = _isLeaf;
+            topLeft = _topLeft;
+            topRight = _topRight;
+            bottomLeft = _bottomLeft;
+            bottomRight = _bottomRight;
+        }
+    }
+
+    #endregion
+
+    #region N叉树
+
+    public class NTreeNode
+    {
+        public int val;
+        public IList<NTreeNode> children;
+
+        public NTreeNode() { }
+        public NTreeNode(int _val, IList<NTreeNode> _children)
+        {
+            val = _val;
+            children = _children;
+        }
+    }
+
+    #endregion
 }

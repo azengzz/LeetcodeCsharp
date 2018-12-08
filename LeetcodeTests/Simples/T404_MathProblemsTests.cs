@@ -198,5 +198,54 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T427 tests : 建立四叉树
+
+        [TestMethod()]
+        public void ConstructTest_1()
+        {
+            int[][] grid = {
+                new int[] { 1,1,1,1,0,0,0,0 },
+                new int[] { 1,1,1,1,0,0,0,0 },
+                new int[] { 1,1,1,1,1,1,1,1 },
+                new int[] { 1,1,1,1,1,1,1,1 },
+                new int[] { 1,1,1,1,0,0,0,0 },
+                new int[] { 1,1,1,1,0,0,0,0 },
+                new int[] { 1,1,1,1,0,0,0,0 },
+                new int[] { 1,1,1,1,0,0,0,0 }
+            };
+            QuadTreeNode tree = t404.Construct(grid);
+            Assert.IsTrue(tree != null);
+        }
+
+        [TestMethod()]
+        public void ConstructTest_2()
+        {
+            int[][] grid = {
+                new int[] { 1 }
+            };
+            QuadTreeNode tree = t404.Construct(grid);
+            Assert.IsTrue(tree != null);
+        }
+
+        [TestMethod()]
+        public void ConstructTest_3()
+        {
+            int[][] grid = {
+                new int[] { 1,1,0,0,0,0,0,0 },
+                new int[] { 1,1,0,0,0,0,0,0},
+                new int[] { 1,1,0,0,0,0,1,1},
+                new int[] { 1,1,0,0,0,0,1,1 },
+                new int[] { 0,0,0,0,0,0,1,1 },
+                new int[] { 0,0,0,0,0,0,1,1 },
+                new int[] { 1,1,1,1,1,1,0,0 },
+                new int[] { 1,1,1,1,1,1,0,0 },
+            };
+            QuadTreeNode tree = t404.Construct(grid);
+            Assert.IsTrue(tree != null);
+        }
+
+        #endregion
+
     }
 }
