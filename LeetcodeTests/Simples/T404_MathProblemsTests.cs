@@ -247,5 +247,78 @@ namespace Leetcode.Simples.Tests
 
         #endregion
 
+        #region T438 tests : 寻找字符串中所有字母异位词
+
+        [TestMethod()]
+        public void FindAnagramsTest_1()
+        {
+            string s = "cbaebabacd";
+            string p = "abc";
+            List<int> expect = new List<int> { 0, 6 };
+
+            Assert.IsTrue(CompareHelper.CompareList(expect, t404.FindAnagrams(s, p)));
+        }
+
+        [TestMethod()]
+        public void FindAnagramsTest_2()
+        {
+            string s = "abab";
+            string p = "ab";
+            List<int> expect = new List<int> { 0, 1, 2 };
+
+            Assert.IsTrue(CompareHelper.CompareList(expect, t404.FindAnagrams(s, p)));
+        }
+
+        [TestMethod()]
+        public void FindAnagramsTest_3()
+        {
+            string s = "";
+            string p = "ab";
+            List<int> expect = new List<int> { };
+
+            Assert.IsTrue(CompareHelper.CompareList(expect, t404.FindAnagrams(s, p)));
+        }
+
+        [TestMethod()]
+        public void FindAnagramsTest_4()
+        {
+            string s = "aa";
+            string p = "bb";
+            List<int> expect = new List<int> { };
+
+            Assert.IsTrue(CompareHelper.CompareList(expect, t404.FindAnagrams(s, p)));
+        }
+
+        #endregion
+
+        #region T441 tests : 排列硬币
+
+        [TestMethod()]
+        public void ArrangeCoinsTest_1()
+        {
+            Assert.IsTrue(5 == t404.ArrangeCoins(15));
+        }
+
+        [TestMethod()]
+        public void ArrangeCoinsTest_2()
+        {
+            Assert.IsTrue(5 == t404.ArrangeCoins(20));
+        }
+
+        [TestMethod()]
+        public void ArrangeCoinsTest_3()
+        {
+            int res = t404.ArrangeCoins(int.MaxValue);
+            Assert.IsTrue(65535 == res);
+        }
+
+        [TestMethod()]
+        public void ArrangeCoinsTest_4()
+        {
+            int res = t404.ArrangeCoins(4);
+            Assert.IsTrue(2 == res);
+        }
+
+        #endregion
     }
 }

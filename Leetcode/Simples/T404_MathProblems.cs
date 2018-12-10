@@ -326,5 +326,76 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T438 找到字符串中所有字母异位词
+
+        public IList<int> FindAnagrams(string s, string p)
+        {
+            List<int> res = new List<int>();
+
+            if (s.Length < p.Length) return res;
+
+            int[] map = new int[26];
+            foreach (char c in p)
+            {
+                map[c - 'a']++;
+            }
+
+            int counter = p.Length;
+            int low = 0, high = 0;
+            char[] schs = s.ToCharArray();
+
+            while (high < s.Length)
+            {
+                if (map[schs[high] - 'a']-- >= 1)
+                    counter--;
+                high++;
+
+                if (counter == 0)
+                    res.Add(low);
+
+                if (high - low == p.Length)
+                {
+                    if (map[schs[low] - 'a']++ >= 0)
+                        counter++;
+                    low++;
+                }
+            }
+
+            return res;
+        }
+
+        #endregion
+
+        #region T441 排列硬币
+
+        public int ArrangeCoins(int n)
+        {
+            if (n == 0) return 0;
+            if (n < 3) return 1;
+
+            long low = 1, high = n;
+            long mid = 0;
+            while (high - low > 1)
+            {
+                mid = (low + high) / 2;
+                long div = (long)n * 2 / mid - 1;
+                if (div < mid)
+                {
+                    high = mid;
+                }
+                else if (div > mid)
+                {
+                    low = mid;
+                }
+                else
+                {
+                    return (int)mid;
+                }
+            }
+            return (int)low;
+        }
+
+        #endregion
     }
 }
