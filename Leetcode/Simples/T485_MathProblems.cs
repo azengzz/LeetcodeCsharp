@@ -135,5 +135,65 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T504 七进制数
+
+        public string ConvertToBase7(int num)
+        {
+            Stack<int> remainds = new Stack<int>();
+            bool isNagative = false;
+            if (num < 0)
+            {
+                num *= -1;
+                isNagative = true;
+            }
+            while (num > 0)
+            {
+                remainds.Push(num % 7);
+                num /= 7;
+            }
+
+            int res = 0;
+            while (remainds.Count > 0)
+            {
+                res *= 10;
+                res += remainds.Pop();
+            }
+            string resstr = isNagative == true ? "-" + res.ToString() : res.ToString();
+            return resstr;
+        }
+
+        #endregion
+
+        #region T506 相对名次
+
+        public string[] FindRelativeRanks(int[] nums)
+        {
+            int[] tmp = new int[nums.Length];
+            nums.CopyTo(tmp, 0);
+
+            Array.Sort(tmp);
+
+            int rank = 1;
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            for (int i = tmp.Length - 1; i >= 0; i--)
+            {
+                dict.Add(tmp[i], rank++);
+            }
+
+            List<string> res = new List<string>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int r = dict[nums[i]];
+                if (r == 1) res.Add("Gold Medal");
+                else if (r == 2) res.Add("Silver Medal");
+                else if (r == 3) res.Add("Bronze Medal");
+                else res.Add(r.ToString());
+            }
+
+            return res.ToArray();
+        }
+
+        #endregion
     }
 }

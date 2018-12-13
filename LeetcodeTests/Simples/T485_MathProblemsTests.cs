@@ -86,5 +86,39 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T504 tests : 七进制数
+
+        [TestMethod()]
+        public void ConvertToBase7Test_1()
+        {
+            Assert.IsTrue("202" == t485.ConvertToBase7(100));
+        }
+
+        [TestMethod()]
+        public void ConvertToBase7Test_2()
+        {
+            Assert.IsTrue("-202" == t485.ConvertToBase7(-100));
+        }
+
+        [TestMethod()]
+        public void ConvertToBase7Test_3()
+        {
+            Assert.IsTrue("-12506414" == t485.ConvertToBase7(-1145141));
+        }
+
+        #endregion
+
+        #region T506 tests : 相对名次
+
+        [TestMethod()]
+        public void FindRelativeRanksTest_1()
+        {
+            int[] nums = { 5, 4, 3, 2, 1 };
+            string[] expect = { "Gold Medal", "Silver Medal", "Bronze Medal", "4", "5" };
+            Assert.IsTrue(CompareHelper.CompareArrays<string>(expect, t485.FindRelativeRanks(nums)));
+        }
+
+        #endregion
     }
 }
