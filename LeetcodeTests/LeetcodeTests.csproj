@@ -70,6 +70,7 @@
     <Compile Include="Simples\T349_MathProblemsTests.cs" />
     <Compile Include="Simples\T404_MathProblemsTests.cs" />
     <Compile Include="Simples\T443_MathProblemsTests.cs" />
+    <Compile Include="Simples\T485_MathProblemsTests.cs" />
     <Compile Include="Simples\T69_MySqrtTests.cs" />
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />
