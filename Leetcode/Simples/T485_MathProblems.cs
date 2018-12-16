@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Leetcode.Simples
@@ -192,6 +193,267 @@ namespace Leetcode.Simples
             }
 
             return res.ToArray();
+        }
+
+        #endregion
+
+        #region T507 完美数
+
+        public bool CheckPerfectNumber(int num)
+        {
+            if (num <= 1) return false;
+
+            List<int> factors = new List<int> { 1 };
+
+            int f = (int)Math.Sqrt(num);
+            while (f > 1)    //寻找所有因子
+            {
+                if (num % f == 0)
+                {
+                    factors.Add(f);
+                    factors.Add(num / f);
+                }
+                f--;
+            }
+            return num == factors.Sum();
+        }
+
+        #endregion
+
+        #region T520 检测大写字母
+
+        public bool DetectCapitalUse(string word)
+        {
+            if (word.ToUpper() == word || word.ToLower() == word)    //检测全大写或全小写
+            {
+                return true;
+            }
+            else
+            {
+                string firstChar = word.Substring(0, 1);
+                string restChars = word.Substring(1, word.Length - 1);
+                if (firstChar.ToUpper() == firstChar && restChars.ToLower() == restChars) return true;
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region T530 二叉搜索树的最小绝对差
+
+        private class MinDiffInfo
+        {
+            public int CurrentDiff { get; set; }
+            public int MinDff { get; set; }
+            public int LastVal { get; set; }
+
+            public MinDiffInfo()
+            {
+                CurrentDiff = 0;
+                MinDff = int.MaxValue;
+                LastVal = int.MaxValue;
+            }
+        }
+
+        public int GetMinimumDifference(TreeNode root)
+        {
+            MinDiffInfo mdi = new MinDiffInfo();
+            GetMin(root, mdi);
+            return mdi.MinDff;
+        }
+
+        private void GetMin(TreeNode root, MinDiffInfo mdi)
+        {
+            if (root == null) return;
+
+            GetMin(root.left, mdi);
+
+            mdi.CurrentDiff = root.val - mdi.LastVal;
+            if (mdi.CurrentDiff < 0) mdi.CurrentDiff *= -1;
+            if (mdi.CurrentDiff < mdi.MinDff) mdi.MinDff = mdi.CurrentDiff;
+            mdi.LastVal = root.val;
+
+            GetMin(root.right, mdi);
+        }
+
+        #endregion
+
+        #region T532 寻找数组中的K-Diff数对
+
+        public int FindPairs(int[] nums, int k)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            int res = 0;
+            foreach (int n in nums)    //数组中各数字出现的次数做成表
+            {
+                if (dict.ContainsKey(n)) dict[n]++;
+                else dict.Add(n, 1);
+            }
+            foreach (int n in nums)
+            {
+                if (k == 0)
+                {
+                    if (dict[n] > 1)
+                        res++;
+                }
+                else
+                {
+                    if (dict[n] == 0) continue;
+                    if (dict.ContainsKey(n - k))
+                    {
+                        if (dict[n - k] > 0) res++;
+                    }
+                    if (dict.ContainsKey(n + k))
+                    {
+                        if (dict[n + k] > 0) res++;
+                    }
+                }
+                dict[n] = 0;    //这个数已经找完了，不要再找它
+            }
+
+            return res;
+        }
+
+        #endregion
+
+        #region T538 把二叉搜索树转换为累加树
+
+        public TreeNode ConvertBST(TreeNode root)
+        {
+            int sum = 0;
+
+            ConvertTree(root, ref sum);
+            return root;
+        }
+
+        private void ConvertTree(TreeNode root, ref int sum)
+        {
+            if (root == null) return;
+
+            ConvertTree(root.right, ref sum);
+            root.val += sum;
+            sum = root.val;
+            ConvertTree(root.left, ref sum);
+        }
+
+        #endregion
+
+        #region T541 反转字符串：每隔K个字符翻转K个字符
+
+        public string ReverseStr(string s, int k)
+        {
+            if (k <= 1) return s;
+
+            StringBuilder sb = new StringBuilder();
+            int nums2K = s.Length / (2 * k);
+
+            for (int i = 0; i < nums2K; i++)
+            {
+                char[] rev = new char[k];
+                char[] norm = new char[k];
+                int rev_end = (i * 2 + 1) * k;
+                for (int j = 0; j < k; j++)
+                {
+                    rev[j] = s[rev_end - 1 - j];
+                    norm[j] = s[rev_end + j];
+                }
+                sb.Append(rev);
+                sb.Append(norm);
+            }
+
+            int rest = s.Length - nums2K * 2 * k;
+            if (rest > k)
+            {
+                char[] temp = new char[k];
+                int rev_end = (nums2K * 2 + 1) * k;
+                for (int j = 0; j < k; j++)
+                {
+                    temp[j] = s[rev_end - 1 - j];
+                }
+                sb.Append(temp);
+                temp = new char[rest - k];
+                for (int j = 0; j < rest - k; j++)
+                {
+                    temp[j] = s[rev_end + j];
+                }
+                sb.Append(temp);
+            }
+            else
+            {
+                char[] temp = new char[rest];
+                for (int j = 0; j < rest; j++)
+                {
+                    temp[j] = s[s.Length - 1 - j];
+                }
+                sb.Append(temp);
+            }
+            return sb.ToString();
+        }
+
+        #endregion
+
+        #region T543 二叉树的直径
+
+        public int DiameterOfBinaryTree(TreeNode root)
+        {
+            int diameter = 0;
+            GetDiameter(root, ref diameter);
+            return diameter;
+        }
+
+        private int GetDiameter(TreeNode node, ref int diameter)
+        {
+            if (node == null) return 0;
+
+            
+            int leftHeight = GetDiameter(node.left, ref diameter);
+            int rightHeight = GetDiameter(node.right, ref diameter);
+            if (diameter < leftHeight + rightHeight)
+                diameter = leftHeight + rightHeight;
+
+            return (leftHeight >= rightHeight ? leftHeight : rightHeight) + 1;
+        }
+
+        #endregion
+
+        #region T551 学生出勤记录
+
+        public bool CheckRecord(string s)
+        {
+            return (Regex.Matches(s, @"A").Count < 2 && !Regex.IsMatch(s, @"LLL"));
+        }
+
+        #endregion
+
+        #region T557 翻转字符串中的单词
+
+        public string ReverseWords(string s)
+        {
+            string[] ss = s.Split(' ');
+            StringBuilder sb = new StringBuilder();
+            foreach (string str in ss)
+            {
+                if (str == "") continue;
+                sb.Append(str.ToCharArray().Reverse().ToArray());
+                sb.Append(" ");
+            }
+            if(sb.Length != 0) sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
+        #endregion
+
+        #region T561 数组拆分
+
+        public int ArrayPairSum(int[] nums)
+        {
+            Array.Sort(nums);
+            int maxMinGroupSum = 0;
+            for (int i = 0; i < nums.Length; i += 2)
+            {
+                maxMinGroupSum += nums[i];
+            }
+            return maxMinGroupSum;
         }
 
         #endregion

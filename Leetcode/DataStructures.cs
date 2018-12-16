@@ -181,6 +181,33 @@ namespace Leetcode
             PreOrderGetElements(tree.left, list);
             PreOrderGetElements(tree.right, list);
         }
+
+        /*
+         * 层序遍历（广度优先遍历）
+         */
+         public static object[] BreadthFirstTraverse(TreeNode tree)
+        {
+            List<object> res = new List<object>();
+
+            if (tree == null) return res.ToArray();
+            
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(tree);
+            while (queue.Count > 0)
+            {
+                TreeNode node = queue.Dequeue();
+                if (node == null)
+                    res.Add(null);
+                else
+                    res.Add(node.val);
+                if (node != null && (node.left != null || node.right != null))
+                {
+                    queue.Enqueue(node.left);
+                    queue.Enqueue(node.right);
+                }
+            }
+            return res.ToArray();
+        }
     }
 
     #endregion

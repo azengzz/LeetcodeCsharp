@@ -120,5 +120,265 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T507 tests : 完美数
+
+        [TestMethod()]
+        public void CheckPerfectNumberTest_1()
+        {
+            Assert.IsTrue(true == t485.CheckPerfectNumber(28));
+        }
+
+        [TestMethod()]
+        public void CheckPerfectNumberTest_2()
+        {
+            Assert.IsTrue(false == t485.CheckPerfectNumber(27));
+        }
+
+        [TestMethod()]
+        public void CheckPerfectNumberTest_3()
+        {
+            Assert.IsTrue(false == t485.CheckPerfectNumber(1));
+        }
+
+        #endregion
+
+        #region T520 tests : 检测大写字母
+
+        [TestMethod()]
+        public void DetectCapitalUseTest_1()
+        {
+            Assert.IsTrue(true == t485.DetectCapitalUse("USA"));
+        }
+
+        [TestMethod()]
+        public void DetectCapitalUseTest_2()
+        {
+            Assert.IsTrue(true == t485.DetectCapitalUse("leetcode"));
+        }
+
+        [TestMethod()]
+        public void DetectCapitalUseTest_3()
+        {
+            Assert.IsTrue(true == t485.DetectCapitalUse("Google"));
+        }
+
+        [TestMethod()]
+        public void DetectCapitalUseTest_4()
+        {
+            Assert.IsTrue(false == t485.DetectCapitalUse("FlaG"));
+        }
+
+        #endregion
+
+        #region T530 tests : 二叉搜索树的最小绝对值差
+
+        [TestMethod()]
+        public void GetMinimumDifferenceTest_1()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 1, null, 3, 2 });
+            Assert.IsTrue(1 == t485.GetMinimumDifference(tree));
+        }
+
+        [TestMethod()]
+        public void GetMinimumDifferenceTest_2()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 100, 50, 200, 20, 60, 170, 260 });
+            Assert.IsTrue(10 == t485.GetMinimumDifference(tree));
+        }
+
+        [TestMethod()]
+        public void GetMinimumDifferenceTest_3()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 1, null, 5, 3 });
+            Assert.IsTrue(2 == t485.GetMinimumDifference(tree));
+        }
+
+        #endregion
+
+        #region T532 tests : 寻找数组中的K-diff数对
+
+        [TestMethod()]
+        public void FindPairsTest_1()
+        {
+            int[] nums = { 3, 1, 4, 1, 5 };
+            int k = 2;
+            Assert.IsTrue(2 == t485.FindPairs(nums, k));
+        }
+
+        [TestMethod()]
+        public void FindPairsTest_2()
+        {
+            int[] nums = { 1, 2, 3, 4, 5 };
+            int k = 1;
+            Assert.IsTrue(4 == t485.FindPairs(nums, k));
+        }
+
+        [TestMethod()]
+        public void FindPairsTest_3()
+        {
+            int[] nums = { 1, 3, 1, 5, 4 };
+            int k = 0;
+            Assert.IsTrue(1 == t485.FindPairs(nums, k));
+        }
+
+        [TestMethod()]
+        public void FindPairsTest_4()
+        {
+            int[] nums = { 1, 1, 1, 2, 1 };
+            int k = 1;
+            Assert.IsTrue(1 == t485.FindPairs(nums, k));
+        }
+
+        #endregion
+
+        #region T538 tests : 把二叉搜索树转换为累加树
+
+        [TestMethod()]
+        public void ConvertBSTTest_1()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 5, 2, 13 });
+            TreeNode newTree = t485.ConvertBST(tree);
+            object[] res = TreeHelper.BreadthFirstTraverse(newTree);
+            object[] expect = new object[] { 18, 20, 13 };
+            Assert.IsTrue(true == CompareHelper.CompareArrays<object>(expect, res));
+        }
+
+        [TestMethod()]
+        public void ConvertBSTTest_2()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 5, 3, 8, 2, null, 6, 9 });
+            TreeNode newTree = t485.ConvertBST(tree);
+            object[] res = TreeHelper.BreadthFirstTraverse(newTree);
+            object[] expect = new object[] { 28, 31, 17, 33, null, 23, 9 };
+            Assert.IsTrue(true == CompareHelper.CompareArrays<object>(expect, res));
+        }
+
+        #endregion
+
+        #region T541 tests : 反转字符串，每隔k个字符翻转
+
+        [TestMethod()]
+        public void ReverseStrTest_1()
+        {
+            string s = "abcdefg";
+            int k = 2;
+            string expect = "bacdfeg";
+            Assert.IsTrue(expect == t485.ReverseStr(s, k));
+        }
+
+        [TestMethod()]
+        public void ReverseStrTest_2()
+        {
+            string s = "abcdefghijklmnopqrstuvw";
+            int k = 3;
+            string expect = "cbadefihgjklonmpqrutsvw";
+            Assert.IsTrue(expect == t485.ReverseStr(s, k));
+        }
+
+        [TestMethod()]
+        public void ReverseStrTest_3()
+        {
+            string s = "abcd";
+            int k = 4;
+            string expect = "dcba";
+            Assert.IsTrue(expect == t485.ReverseStr(s, k));
+        }
+
+        #endregion
+
+        #region T543 tests : 二叉树的直径
+
+        [TestMethod()]
+        public void DiameterOfBinaryTreeTest_1()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 1, 2, 3, 4, 5 });
+            Assert.IsTrue(3 == t485.DiameterOfBinaryTree(tree));
+        }
+
+        [TestMethod()]
+        public void DiameterOfBinaryTreeTest_2()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 1, 2, 3, 4, 5, null, null, null, null, 6, null });
+            Assert.IsTrue(4 == t485.DiameterOfBinaryTree(tree));
+        }
+
+        [TestMethod()]
+        public void DiameterOfBinaryTreeTest_3()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 1, null, 2, 3, 4, null, null, null, 5 });
+            Assert.IsTrue(3 == t485.DiameterOfBinaryTree(tree));
+        }
+
+        #endregion
+
+        #region T551 tests : 学生出勤记录
+
+        [TestMethod()]
+        public void CheckRecordTest_1()
+        {
+            Assert.IsTrue(true == t485.CheckRecord("PPALLP"));
+        }
+
+        [TestMethod()]
+        public void CheckRecordTest_2()
+        {
+            Assert.IsTrue(false == t485.CheckRecord("PPALLL"));
+        }
+
+        [TestMethod()]
+        public void CheckRecordTest_3()
+        {
+            Assert.IsTrue(false == t485.CheckRecord("AAAA"));
+        }
+
+        #endregion
+
+        #region T557 tests : 反转字符串中的单词
+
+        [TestMethod()]
+        public void ReverseWordsTest_1()
+        {
+            string s = "Let's take LeetCode contest";
+            string expect = "s'teL ekat edoCteeL tsetnoc";
+            Assert.IsTrue(expect == t485.ReverseWords(s));
+        }
+
+        [TestMethod()]
+        public void ReverseWordsTest_2()
+        {
+            string s = "L";
+            string expect = "L";
+            Assert.IsTrue(expect == t485.ReverseWords(s));
+        }
+
+        [TestMethod()]
+        public void ReverseWordsTest_3()
+        {
+            string s = "    ";
+            string expect = "";
+            Assert.IsTrue(expect == t485.ReverseWords(s));
+        }
+
+        [TestMethod()]
+        public void ReverseWordsTest_4()
+        {
+            string s = "we     are    no    1    ";
+            string expect = "ew era on 1";
+            Assert.IsTrue(expect == t485.ReverseWords(s));
+        }
+
+        #endregion
+
+        #region T561 tests : 数组拆分
+
+        [TestMethod()]
+        public void ArrayPairSumTest_1()
+        {
+            int[] nums = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+            Assert.IsTrue(45 == t485.ArrayPairSum(nums));
+        }
+
+        #endregion
     }
 }
