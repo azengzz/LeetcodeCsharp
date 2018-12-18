@@ -274,5 +274,220 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T598 范围求和II
+
+        public int MaxCount(int m, int n, int[,] ops)
+        {
+            //每次都是从[0,0]位置开始的矩形，找出最小a和最小b即可
+            if (ops.GetLength(0) == 0) return m * n;
+
+            int min_a = int.MaxValue, min_b = int.MaxValue;
+            int pairs = ops.GetLength(0);
+            for (int i = 0; i < pairs; i++)
+            {
+                if (min_a > ops[i, 0]) min_a = ops[i, 0];
+                if (min_b > ops[i, 1]) min_b = ops[i, 1];
+            }
+            return min_a * min_b;
+        }
+
+        #endregion
+
+        #region T599 两个列表的最小索引总和
+
+        //第一个数组入字典，然后查第二个数组。如果新加入的字符串的索引和小于已放入结果链表中的字符串的索引和，则清空链表后添加新的字符串
+        public string[] FindRestaurant(string[] list1, string[] list2)
+        {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            int minIndexSum = int.MaxValue;
+            for (int i = 0; i < list1.Length; i++)
+            {
+                dict.Add(list1[i], i);
+            }
+
+            List<string> res = new List<string>();
+            for (int i = 0; i < list2.Length; i++)
+            {
+                if (dict.ContainsKey(list2[i]))
+                {
+                    int indexSum = dict[list2[i]] + i;
+                    if (indexSum < minIndexSum)
+                    {
+                        res.Clear();
+                        res.Add(list2[i]);
+                        minIndexSum = indexSum;
+                    }
+                    else if (indexSum == minIndexSum)
+                    {
+                        res.Add(list2[i]);
+                    }
+                }
+            }
+            return res.ToArray();
+        }
+
+        #endregion
+
+        #region T605 种花问题
+
+        public bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            int count = 0;
+            for (int i = 0; i < flowerbed.Length && count < n; i++)
+            {
+                if (flowerbed[i] == 0)
+                {
+                    int prev = (i == 0) ? 0 : flowerbed[i - 1];
+                    int next = (i == flowerbed.Length - 1) ? 0 : flowerbed[i + 1];
+                    if (prev == 0 && next == 0)
+                    {
+                        flowerbed[i] = 1;
+                        count++;
+
+                    }
+                }
+            }
+
+            return count == n;
+        }
+
+        #endregion
+
+        #region T606 根据二叉树创建字符串
+
+        public string Tree2str(TreeNode t)
+        {
+            if (t == null) return "";
+
+            StringBuilder sb = new StringBuilder(t.val.ToString());
+            if (t.left != null || t.right != null)
+            {
+                FillString(t.left, ref sb);
+                if (t.right != null) FillString(t.right, ref sb);
+            }           
+            return sb.ToString();
+        }
+
+        private void FillString(TreeNode node, ref StringBuilder sb)
+        {
+            if (node == null)
+            {
+                sb.Append("()");
+                return;
+            }
+
+            sb.Append("(");
+            sb.Append(node.val.ToString());
+            if (node.left == null && node.right == null)
+            {
+                sb.Append(")");
+                return;
+            }
+
+            
+            FillString(node.left, ref sb);
+            if (node.right != null) FillString(node.right, ref sb);
+            sb.Append(")");
+        }
+
+        #endregion
+
+        #region T617 合并二叉树
+        public TreeNode MergeTrees(TreeNode t1, TreeNode t2)
+        {
+            TreeNode node;
+
+            if (t1 != null && t2 != null)
+            {
+                node = new TreeNode(t1.val + t2.val);
+                node.left = MergeTrees(t1.left, t2.left);
+                node.right = MergeTrees(t1.right, t2.right);
+            }
+            else if (t1 != null)
+            {
+                node = new TreeNode(t1.val);
+                node.left = MergeTrees(t1.left, null);
+                node.right = MergeTrees(t1.right, null);
+            }
+            else if (t2 != null)
+            {
+                node = new TreeNode(t2.val);
+                node.left = MergeTrees(null, t2.left);
+                node.right = MergeTrees(null,t2.right);
+            }
+            else
+            {
+                node = null;
+            }
+            return node;
+        }
+
+
+        #endregion
+
+        #region T628 在数组中找出三个数使得它们的乘积最大
+        //要考虑到一个正数乘以两个负数的情况
+        public int MaximumProduct(int[] nums)
+        {
+            Array.Sort(nums);
+            if (nums[0] < 0 && nums[1] < 0)
+            {
+                int res1 = nums[0] * nums[1] * nums[nums.Length - 1];
+                int res2 = nums[nums.Length - 1] * nums[nums.Length - 2] * nums[nums.Length - 3];
+                return res1 >= res2 ? res1 : res2;
+            }
+            return nums[nums.Length - 1] * nums[nums.Length - 2] * nums[nums.Length - 3];
+        }
+
+        #endregion
+
+        #region T633 平方数之和
+
+        public bool JudgeSquareSum(int c)
+        {
+            int b = (int)Math.Sqrt(c);
+            for (int i = 0; i <= b; i++)
+            {
+                double x = Math.Sqrt(c - i * i);
+                if (x - (int)x == 0)
+                    return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region T637 二叉树的层平均值
+
+        public IList<double> AverageOfLevels(TreeNode root)
+        {
+            if (root == null) return new List<double>();
+
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            List<TreeNode> temp = new List<TreeNode>();
+            List<double> res = new List<double>();
+
+            queue.Enqueue(root);
+            while (queue.Count > 0)
+            {
+                while(queue.Count > 0)
+                {
+                    temp.Add(queue.Dequeue());
+                }
+                double avg = 0;
+                foreach (var node in temp)
+                {
+                    avg += node.val;
+                    if (node.left != null) queue.Enqueue(node.left);
+                    if (node.right != null) queue.Enqueue(node.right);
+                }
+                res.Add(avg / temp.Count);
+                temp.Clear();
+            }
+            return res;
+        }
+
+        #endregion
     }
 }
