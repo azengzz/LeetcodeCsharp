@@ -66,6 +66,7 @@
     <Compile Include="Simples\T443_MathProblems.cs" />
     <Compile Include="Simples\T485_MathProblems.cs" />
     <Compile Include="Simples\T563_Problems.cs" />
+    <Compile Include="Simples\T665_Problems.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />

@@ -489,5 +489,118 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T643 子数组最大平均数
+
+        public double FindMaxAverage(int[] nums, int k)
+        {
+            int rear = 0, front = k - 1;
+            int sum = 0;
+            for (int i = rear; i <= front; i++)
+            {
+                sum += nums[i];
+            }
+            int max = sum;
+            while (front < nums.Length - 1)
+            {
+                sum = sum - nums[rear++] + nums[++front];
+                if (sum > max) max = sum;
+            }
+            return (double)max / (double)k;
+        }
+        #endregion
+
+        #region T645 错误的集合
+        //给定数组长度为[2,10000]，不用担心数太大溢出
+        public int[] FindErrorNums(int[] nums)
+        {
+            int[] temp = new int[nums.Length + 1];
+            temp[0] = int.MinValue;
+            int i = 0;
+            for (i = 0; i < nums.Length; i++)
+            {
+                if (temp[nums[i]] == nums[i]) break;
+                else temp[nums[i]] = nums[i];
+            }
+            int correctSum = (1 + nums.Length) * nums.Length / 2;
+            return new int[] { nums[i], nums[i] + correctSum - nums.Sum() };
+        }
+
+        #endregion
+
+        #region T653 在BST中有无两个节点的值之和等于给定值
+        //遍历BST，将节点值放入字典
+        public bool FindTarget(TreeNode root, int k)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            return PreOrderAndSetDictionary(root, dict, k);
+        }
+
+        private bool PreOrderAndSetDictionary(TreeNode node, Dictionary<int, int> dict, int expectSum)
+        {
+            //为加快速度，边查找字典边添加
+            if (node == null) return false;
+            if (dict.ContainsKey(expectSum - node.val) && (expectSum - node.val != node.val))
+                return true;
+
+            if (!dict.ContainsKey(node.val))
+            {
+                dict.Add(node.val, 1);
+            }
+            return (PreOrderAndSetDictionary(node.left, dict, expectSum) || PreOrderAndSetDictionary(node.right, dict, expectSum));
+        }
+
+        #endregion
+
+        #region T657 能否返回原点
+
+        public bool JudgeCircle(string moves)
+        {
+            int up = 0, down = 0, left = 0, right = 0;
+            for (int i = 0; i < moves.Length; i++)
+            {
+                if (moves[i] == 'U') up++;
+                else if (moves[i] == 'D') down++;
+                else if (moves[i] == 'L') left++;
+                else if (moves[i] == 'R') right++;
+            }
+            return (up == down && left == right);
+        }
+
+        #endregion
+
+        #region T661 图片平滑器
+
+        public int[,] ImageSmoother(int[,] M)
+        {
+            int[][] mask = 
+            {
+                new int[]{-1,-1}, new int[] {-1, 0}, new int[] {-1, 1},
+                new int[]{0, -1}, new int[] { 0, 0}, new int[] { 0, 1},
+                new int[]{1, -1}, new int[] { 1, 0}, new int[] { 1, 1},
+            };
+            int rows = M.GetLength(0);
+            int cols = M.GetLength(1);
+            int[,] res = new int[rows, cols];
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    int sum = 0, div = 0;
+                    for (int i = 0; i < mask.Length; i++)
+                    {
+                        if (row + mask[i][0] < 0 || row + mask[i][0] >= rows
+                         || col + mask[i][1] < 0 || col + mask[i][1] >= cols)
+                            continue;
+                        sum += M[row + mask[i][0], col + mask[i][1]];
+                        div++;
+                    }
+                    res[row, col] = sum / div;
+                }
+            }
+            return res;
+        }
+
+        #endregion
     }
 }

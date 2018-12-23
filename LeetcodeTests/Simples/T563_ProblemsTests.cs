@@ -342,8 +342,139 @@ namespace Leetcode.Simples.Tests
         public void AverageOfLevelsTest_1()
         {
             TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 3, 9, 20, null, null, 15, 7 });
-            List<double> expect = new   List<double>(){ 3, 14.5, 11 };
+            List<double> expect = new List<double>() { 3, 14.5, 11 };
             Assert.IsTrue(CompareHelper.CompareList<double>(expect, t563.AverageOfLevels(tree)));
+        }
+
+        #endregion
+
+        #region T643 tests : 子数组最大平均数
+
+        [TestMethod()]
+        public void FindMaxAverageTest_1()
+        {
+            int[] nums = { 1, 12, -5, -6, 50, 3 };
+            Assert.IsTrue(12.75 == t563.FindMaxAverage(nums, 4));
+        }
+
+        #endregion
+
+        #region T645 tests : 错误的集合
+
+        [TestMethod()]
+        public void FindErrorNumsTest_1()
+        {
+            int[] nums = { 1, 2, 5, 4, 6, 7, 8, 9, 10, 11, 12, 6, 13, 14, 15, 16, 17, 18, 19, 20 };
+            int[] expect = { 6, 3 };
+            Assert.IsTrue(CompareHelper.CompareArrays(expect, t563.FindErrorNums(nums)));
+        }
+
+        #endregion
+
+        #region T653 tests : 在BST中有无两个节点的值之和等于给定值
+
+        [TestMethod()]
+        public void FindTargetTest_1()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 5, 3, 6, 2, 4, null, 7 });
+            Assert.IsTrue(true == t563.FindTarget(tree, 9));
+        }
+
+        [TestMethod()]
+        public void FindTargetTest_2()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 5, 3, 6, 2, 4, null, 7 });
+            Assert.IsTrue(false == t563.FindTarget(tree, 20));
+        }
+
+        [TestMethod()]
+        public void FindTargetTest_3()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { });
+            Assert.IsTrue(false == t563.FindTarget(tree, 20));
+        }
+
+        [TestMethod()]
+        public void FindTargetTest_4()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 9 });
+            Assert.IsTrue(false == t563.FindTarget(tree, 9));
+        }
+
+        [TestMethod()]
+        public void FindTargetTest_5()
+        {
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 2, null, 3 });
+            Assert.IsTrue(false == t563.FindTarget(tree, 6));
+        }
+
+        [TestMethod()]
+        public void FindTargetTest_6()
+        {
+            //BST中可否出现重复的数字？提交测试过之后得到的答案是不允许
+            TreeNode tree = TreeHelper.CreateBinaryTreeByArray(new object[] { 3, 2, 5, 0, 2 });
+            Assert.IsTrue(false == t563.FindTarget(tree, 4));
+        }
+
+        #endregion
+
+        #region T661 tests : 图片平滑器
+
+        [TestMethod()]
+        public void ImageSmootherTest_1()
+        {
+            int[,] M = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+            int[,] expect = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+            int[,] result = t563.ImageSmoother(M);
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    if (expect[i, j] != result[i, j])
+                    {
+                        Assert.Fail();
+                    }
+                }
+            }
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod()]
+        public void ImageSmootherTest_2()
+        {
+            int[,] M = { { 1, 1, 1, 2 }, { 1, 0, 1, 3 }, { 1, 1, 1, 9 }, { 6, 7, 8, 9 } };
+            int[,] expect = { { 0, 0, 1, 1 }, { 0, 0, 2, 2 }, { 2, 2, 4, 5 }, { 3, 4, 5, 6 } };
+            int[,] result = t563.ImageSmoother(M);
+            for(int i = 0; i < M.GetLength(0); i++)
+            {
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    if (expect[i, j] != result[i, j])
+                    {
+                        Assert.Fail();
+                    }
+                }
+            }
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod()]
+        public void ImageSmootherTest_3()
+        {
+            int[,] M = { { 2,3 }};
+            int[,] expect = { { 2, 2 } };
+            int[,] result = t563.ImageSmoother(M);
+            for (int i = 0; i < M.GetLength(0); i++)
+            {
+                for (int j = 0; j < M.GetLength(1); j++)
+                {
+                    if (expect[i, j] != result[i, j])
+                    {
+                        Assert.Fail();
+                    }
+                }             
+            }
+            Assert.IsTrue(true);
         }
 
         #endregion
