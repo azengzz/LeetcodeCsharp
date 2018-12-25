@@ -113,6 +113,26 @@ namespace Leetcode
 
             return true;
         }
+
+        public static bool CompareTwoDimensionalArray<T>(T[,] arr1, T[,] arr2)
+        {
+            if (arr1 == null && arr2 == null) return true;            
+            if (arr1.GetLength(0) != arr2.GetLength(0) || arr1.GetLength(1) != arr2.GetLength(1)) return false;
+
+            int rows = arr1.GetLength(0);
+            int cols = arr1.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (arr1[i,j] == null && arr2[i,j] == null) continue;
+                    if (arr1[i,j] == null || arr2[i,j] == null) return false;
+                    if (!arr1[i,j].Equals(arr2[i,j])) return false;
+                }                
+            }
+            return true;
+        }
     }
 
     #endregion

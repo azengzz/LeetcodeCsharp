@@ -69,6 +69,7 @@
     <Compile Include="Simples\T665_Problems.cs" />
     <Compile Include="Simples\T69_MySqrt.cs" />
     <Compile Include="Simples\T70_ClimbStairs.cs" />
+    <Compile Include="Simples\T733_Problems.cs" />
     <Compile Include="Simples\T83_DeleteDuplicates.cs" />
     <Compile Include="Simples\T88_MergeSortedArrays.cs" />
   </ItemGroup>
