@@ -264,5 +264,204 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T819 tests : 最常见的单词
+
+        [TestMethod()]
+        public void MostCommonWordTest_1()
+        {
+            string para = "Bob hit a ball, the hit BALL flew far after it was hit.";
+            string[] bans = { "hit" };
+            Assert.IsTrue("ball" == t773.MostCommonWord(para, bans));
+        }
+
+        [TestMethod()]
+        public void MostCommonWordTest_2()
+        {
+            string para = "a, a, a, a, b,b,b,c, c";
+            string[] bans = { "a" };
+            Assert.IsTrue("b" == t773.MostCommonWord(para, bans));
+        }
+
+        #endregion
+
+        #region T821 tests : 字符的最短距离
+
+        [TestMethod()]
+        public void ShortestToCharTest_1()
+        {
+            int[] expect = { 3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0 };
+            Assert.IsTrue(CompareHelper.CompareArrays(expect, t773.ShortestToChar("loveleetcode", 'e')));
+        }
+
+
+        #endregion
+
+        #region T824 tests : 山羊拉丁文
+
+        [TestMethod()]
+        public void ToGoatLatinTest_1()
+        {
+            string expect = "Imaa peaksmaaa oatGmaaaa atinLmaaaaa";
+            Assert.IsTrue(expect == t773.ToGoatLatin("I speak Goat Latin"));
+        }
+
+        [TestMethod()]
+        public void ToGoatLatinTest_2()
+        {
+            string expect = "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa";
+            Assert.IsTrue(expect == t773.ToGoatLatin("The quick brown fox jumped over the lazy dog"));
+        }
+
+        #endregion
+
+        #region T830 tests : 较大分组的位置
+
+        [TestMethod()]
+        public void LargeGroupPositionsTest_1()
+        {
+            List<IList<int>> expect = new List<IList<int>> { new List<int> { 3, 6 } };
+            Assert.IsTrue(CompareHelper.CompareListList(expect, t773.LargeGroupPositions("abbxxxxzzy")));
+        }
+
+        [TestMethod()]
+        public void LargeGroupPositionsTest_2()
+        {
+            List<IList<int>> expect = new List<IList<int>> { new List<int> { 3, 6 }, new List<int> { 9, 13 } };
+            Assert.IsTrue(CompareHelper.CompareListList(expect, t773.LargeGroupPositions("abbxxxxzzyyyyy")));
+        }
+
+        [TestMethod()]
+        public void LargeGroupPositionsTest_3()
+        {
+            List<IList<int>> expect = new List<IList<int>> { };
+            Assert.IsTrue(CompareHelper.CompareListList(expect, t773.LargeGroupPositions("abc")));
+        }
+
+        #endregion
+
+        #region T832 tests : 翻转图像
+
+        [TestMethod()]
+        public void FlipAndInvertImageTest_1()
+        {
+            int[][] A = new int[][] { new int[] { 1, 1, 0 }, new int[] { 1, 0, 1 }, new int[] { 0, 0, 0 } };
+            int[][] result = t773.FlipAndInvertImage(A);
+            Assert.IsTrue(true);
+        }
+
+        #endregion
+
+        #region T836 tests : 矩形重叠
+
+        [TestMethod()]
+        public void IsRectangleOverlapTest_1()
+        {
+            int[] rect1 = { 0, 0, 2, 2 };
+            int[] rect2 = { 1, 1, 3, 3 };
+            Assert.IsTrue(true == t773.IsRectangleOverlap(rect1, rect2));
+        }
+
+        [TestMethod()]
+        public void IsRectangleOverlapTest_2()
+        {
+            int[] rect1 = { 0, 0, 1, 1 };
+            int[] rect2 = { 1, 0, 2, 1 };
+            Assert.IsTrue(false == t773.IsRectangleOverlap(rect1, rect2));
+        }
+
+        #endregion
+
+        #region T840 tests : 矩阵中的幻方
+
+        [TestMethod()]
+        public void NumMagicSquaresInsideTest_1()
+        {
+            int[][] grid = { new int[] { 4, 3, 8, 4 }, new int[] { 9, 5, 1, 9 }, new int[] { 2, 7, 6, 2 } };
+            Assert.IsTrue(1 == t773.NumMagicSquaresInside(grid));
+        }
+
+        [TestMethod()]
+        public void NumMagicSquaresInsideTest_2()
+        {
+            int[][] grid = { new int[] { 2, 7, 6 }, new int[] { 1, 5, 9 }, new int[] { 4, 3, 8 } };
+            Assert.IsTrue(0 == t773.NumMagicSquaresInside(grid));
+        }
+
+        [TestMethod()]
+        public void NumMagicSquaresInsideTest_3()
+        {
+            int[][] grid = { new int[] { 5, 5, 5 }, new int[] { 5, 5, 5 }, new int[] { 5, 5, 5 } };
+            Assert.IsTrue(0 == t773.NumMagicSquaresInside(grid));
+        }
+
+        [TestMethod()]
+        public void NumMagicSquaresInsideTest_4()
+        {
+            int[][] grid = { new int[] { 7, 0, 5 }, new int[] { 2, 4, 6 }, new int[] { 3, 8, 1 } };
+            Assert.IsTrue(0 == t773.NumMagicSquaresInside(grid));
+        }
+
+        #endregion
+
+        #region T844 tests : 比较包含退格的字符串
+
+        [TestMethod()]
+        public void BackspaceCompareTest_1()
+        {
+            Assert.IsTrue(true == t773.BackspaceCompare("a##c", "#a#c"));
+        }
+
+        #endregion
+
+        #region T849 tests : 到最近的人的最大距离
+
+        [TestMethod()]
+        public void MaxDistToClosestTest_1()
+        {
+            Assert.IsTrue(2 == t773.MaxDistToClosest(new int[] { 1, 0, 0, 0, 1, 0, 1 }));
+        }
+
+        [TestMethod()]
+        public void MaxDistToClosestTest_2()
+        {
+            Assert.IsTrue(3 == t773.MaxDistToClosest(new int[] { 1, 0, 0, 0 }));
+        }
+
+        [TestMethod()]
+        public void MaxDistToClosestTest_3()
+        {
+            Assert.IsTrue(3 == t773.MaxDistToClosest(new int[] { 0, 0, 0, 1 }));
+        }
+
+        [TestMethod()]
+        public void MaxDistToClosestTest_4()
+        {
+            Assert.IsTrue(2 == t773.MaxDistToClosest(new int[] { 0, 0, 1, 0, 0, 0, 0, 1, 0 }));
+        }
+
+        [TestMethod()]
+        public void MaxDistToClosestTest_5()
+        {
+            Assert.IsTrue(8 == t773.MaxDistToClosest(new int[] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 }));
+        }
+
+        #endregion
+
+        #region T859 亲密字符串
+
+        [TestMethod()]
+        public void BuddyStringsTest_1()
+        {            
+            Assert.IsTrue(false == t773.BuddyStrings("abcaa", "abcbb"));
+        }
+
+        [TestMethod()]
+        public void BuddyStringsTest_2()
+        {
+            Assert.IsTrue(true == t773.BuddyStrings("abcda", "abcad"));
+        }
+
+        #endregion
     }
 }

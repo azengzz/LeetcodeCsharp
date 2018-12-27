@@ -531,5 +531,377 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T819 最常见的单词
+
+        /*
+         * 1, 从字符串中分离出单词，转换成小写；
+         * 2, 单词是否在禁用表中；
+         * 3, 不在禁用表中的单词添加到结果表中，累加它的出现次数；
+         * 4, 输出出现次数最多的单词
+         */
+        public string MostCommonWord(string paragraph, string[] banned)
+        {
+            HashSet<string> bans = new HashSet<string>();
+            Dictionary<string, int> results = new Dictionary<string, int>();
+
+            foreach (string b in banned) bans.Add(b);
+
+            int start = 0, end = 0;
+            while (end <= paragraph.Length)
+            {
+                if (end == paragraph.Length || !IsAlpha(paragraph[end]))
+                {
+                    int wordLength = end - start;
+                    string word = paragraph.Substring(start, wordLength).ToLower();
+                    if (wordLength > 0 && !bans.Contains(word))
+                    {
+                        if (results.ContainsKey(word))
+                        {
+                            results[word]++;
+                        }
+                        else
+                        {
+                            results[word] = 1;
+                        }
+                    }
+                    end++;
+                    start = end;               
+                }
+                else
+                {
+                    end++;
+                }
+            }
+            int freq = results.Values.Max();
+            return (from re in results where re.Value == freq select re.Key).ToArray()[0];
+        }
+
+        private bool IsAlpha(char ch)
+        {
+            return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+        }
+
+        #endregion
+
+        #region T821 字符的最短距离
+
+        public int[] ShortestToChar(string S, char C)
+        {
+            List<int> indexs = new List<int>();
+            for (int i = 0; i < S.Length; i++)
+            {
+                if (S[i] == C) indexs.Add(i);
+            }
+
+            int ptr = 0;
+            int index0 = indexs[ptr];
+            int index1 = index0;
+            int[] result = new int[S.Length];
+            for (int i = 0; i < S.Length; i++)
+            {
+                if (i < index0) result[i] = index0 - i;
+                else if (i == index0 || i == index1)
+                {
+                    result[i] = 0;
+                    index0 = index1;
+                    ++ptr;
+                    if (ptr < indexs.Count)  index1 = indexs[ptr];
+                }
+                else if (i > index0 && i <= index1)
+                {
+                    result[i] = Math.Min(Math.Abs(i - index0), Math.Abs(i - index1));
+                }
+                else
+                {
+                    result[i] = i - index1;
+                }
+            }
+            return result;
+        }
+
+        #endregion
+
+        #region T824 山羊拉丁文
+
+        public string ToGoatLatin(string S)
+        {
+            HashSet<char> vowels = new HashSet<char> { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            StringBuilder result = new StringBuilder();
+            string[] words = S.Split(' ');
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                StringBuilder word = new StringBuilder(words[i]);
+                if (!vowels.Contains(word[0]))
+                {
+                    char c = word[0];
+                    word.Remove(0, 1);
+                    word.Append(c);
+                }
+                word.Append("ma");
+                word.Append('a', i + 1);
+
+                result.Append(word + " ");
+            }
+            return result.Remove(result.Length - 1, 1).ToString();
+        }
+
+        #endregion
+
+        #region T830 较大分组的位置
+
+        public IList<IList<int>> LargeGroupPositions(string S)
+        {
+            List<IList<int>> res = new List<IList<int>>();
+            int start = 0, end = 0;
+
+            while (end <= S.Length)
+            {
+                if (end == S.Length || S[start] != S[end])
+                {
+                    if (end - start >= 3)
+                    {
+                        res.Add(new List<int> { start, end - 1 });
+                    }
+                    start = end;
+                }
+                end++;
+            }
+            return res;
+        }
+
+        #endregion
+
+        #region T832 翻转图像
+
+        public int[][] FlipAndInvertImage(int[][] A)
+        {
+            for(int i = 0; i < A.Length; i++)
+            {
+                A[i] = A[i].Reverse().ToArray();
+                for (int j = 0; j < A[i].Length; j++)
+                    A[i][j] ^= 1;
+            }
+            return A;
+        }
+
+        #endregion
+
+        #region T836 矩形重叠
+
+        public bool IsRectangleOverlap(int[] rec1, int[] rec2)
+        {
+            return ((long)(rec2[0] - rec1[2]) * (long)(rec2[2] - rec1[0]) < 0)
+                && ((long)(rec2[1] - rec1[3]) * (long)(rec2[3] - rec1[1]) < 0);
+        }
+
+        #endregion
+
+        #region T840 矩阵中的幻方
+
+        public int NumMagicSquaresInside(int[][] grid)
+        {          
+            int count = 0;
+            
+            for (int i = 0; i < grid.Length - 2; i++)
+            {
+                for (int j = 0; j < grid[0].Length - 2; j++)
+                {
+                    int[] arrA = new int[3];
+                    int[] arrB = new int[3];
+                    int[] arrC = new int[3];
+                    HashSet<int> marked = new HashSet<int>();
+                    bool enable = true;
+                    for (int m = 0; m < 3; m++)
+                    {
+                        if (marked.Contains(grid[i][j + m]) || grid[i][j + m] < 1 || grid[i][j + m] > 9)
+                        {
+                            enable = false;
+                            break;
+                        }
+                        if (marked.Contains(grid[i + 1][j + m]) || grid[i+1][j + m] < 1 || grid[i + 1][j + m] > 9)
+                        {
+                            enable = false;
+                            break;
+                        }
+                        if (marked.Contains(grid[i + 2][j + m]) || grid[i+2][j + m] < 1 || grid[i + 2][j + m] > 9)
+                        {
+                            enable = false;
+                            break;
+                        }
+                        arrA[m] = grid[i][j + m];
+                        arrB[m] = grid[i + 1][j + m];
+                        arrC[m] = grid[i + 2][j + m];
+                        marked.Add(arrA[m]);
+                        marked.Add(arrB[m]);
+                        marked.Add(arrC[m]);
+                    }
+                    if (enable)    //都是有效数字
+                    {
+                        int oblique1 = arrA[0] + arrB[1] + arrC[2];
+                        int oblique2 = arrA[2] + arrB[1] + arrC[0];
+                        int col1 = arrA[0] + arrB[0] + arrC[0];
+                        int col2 = arrA[1] + arrB[1] + arrC[1];
+                        int col3 = arrA[2] + arrB[2] + arrC[2];
+                        int sumA = arrA.Sum();
+                        if (sumA == arrB.Sum() && sumA == arrC.Sum() && sumA == arrC.Sum() 
+                            && sumA == col1 && sumA == col2 && sumA == col3
+                            && sumA == oblique1 && sumA == oblique2)
+                            count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        #endregion
+
+        #region T844 比较含退格的字符串
+
+        public bool BackspaceCompare(string S, string T)
+        {
+            Stack<char> stackS = new Stack<char>();
+            Stack<char> stackT = new Stack<char>();
+
+            StringIntoStack(stackS, S);
+            StringIntoStack(stackT, T);
+
+            if (stackS.Count != stackT.Count) return false;
+
+            while (stackS.Count > 0)
+            {
+                if (stackS.Pop() != stackT.Pop()) return false;
+            }
+            return true;
+        }
+
+        private void StringIntoStack(Stack<char> stk, string s)
+        {
+            foreach (char c in s)
+            {
+                if (c != '#') stk.Push(c);
+                else if (stk.Count > 0) stk.Pop();
+            }
+        }
+
+        #endregion
+
+        #region T849 到最近的人的最大距离
+
+        //最大值只可能出现在三种位置：最前N个0；最后N个0；中间连续0的个数除以2
+        public int MaxDistToClosest(int[] seats)
+        {
+            int firstOneIndex = int.MinValue;
+            int lastOneIndex = int.MinValue;
+            int left = int.MinValue, right = int.MinValue;
+            int max = 0;
+
+            for (int i = 0; i < seats.Length; i++)
+            {
+                if (seats[i] == 0) continue;
+                if (firstOneIndex < 0)
+                {
+                    firstOneIndex = i;
+                    lastOneIndex = i;
+                    left = i;
+                }
+                if (i > lastOneIndex)
+                {
+                    lastOneIndex = i;
+                }
+                if (right <= left)
+                {
+                    right = i;
+                    max = Math.Max(max, (right - left) / 2);
+                    left = right;
+                }
+            }
+            if (firstOneIndex > max) max = firstOneIndex;
+            if (seats.Length - lastOneIndex > max) max = seats.Length - lastOneIndex - 1;
+            return max;
+        }
+
+        #endregion
+
+        #region T852 山脉数组的峰值索引
+        //题干已说明数组一定是山脉数组
+        public int PeakIndexInMountainArray(int[] A)
+        {
+            return Array.IndexOf(A, A.Max());
+        }
+
+        #endregion
+
+        #region T859 亲密字符串
+
+        public bool BuddyStrings(string A, string B)
+        {
+            if (A == null || B == null) return false;
+            if (A.Length < 2 || B.Length < 2) return false;
+
+            List<int> difference = new List<int>();
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] != B[i]) difference.Add(i);
+            }
+
+            if (difference.Count == 0)
+            {
+                //如果A和B相等，若字符串A中没有重复的字符，则无法完成题目要求的交换字符操作。
+                HashSet<char> charSet = new HashSet<char>();
+                foreach (char c in A)
+                {
+                    if (charSet.Contains(c)) return true;
+                    else charSet.Add(c);
+                }
+                return false;
+            }
+
+            if (difference.Count != 2) return false;
+
+            //如果A和B中确实有两个字符不同，则试着交换A中那两个不同的字符，看是否能和B相等
+            StringBuilder temp = new StringBuilder(A);
+            temp[difference[0]] = A[difference[1]];
+            temp[difference[1]] = A[difference[0]];
+            return temp.ToString() == B;
+        }
+
+        #endregion
+
+        #region T860 柠檬水找零
+
+        public bool LemonadeChange(int[] bills)
+        {
+            Dictionary<int, int> wallet = new Dictionary<int, int> { { 5, 0 }, { 10, 0 }, { 20, 0 } };    //当前钱包中纸币种类与余额
+
+            foreach (int bill in bills)
+            {
+                wallet[bill] += 1;    //收钱
+
+                //找钱
+                if (bill == 10)
+                {
+                    if (wallet[5] == 0) return false;
+                    wallet[5]--;
+                }
+                else if (bill == 20)
+                {
+                    if (wallet[10] != 0 && wallet[5] != 0)
+                    {
+                        wallet[10]--;
+                        wallet[5]--;
+                    }
+                    else if (wallet[5] >= 3)
+                    {
+                        wallet[5] -= 3;
+                    }
+                    else return false;
+                }
+            }
+            return true;
+        }
+
+        #endregion
     }
 }
