@@ -874,7 +874,7 @@ namespace Leetcode.Simples
         public bool LemonadeChange(int[] bills)
         {
             Dictionary<int, int> wallet = new Dictionary<int, int> { { 5, 0 }, { 10, 0 }, { 20, 0 } };    //当前钱包中纸币种类与余额
-
+           
             foreach (int bill in bills)
             {
                 wallet[bill] += 1;    //收钱

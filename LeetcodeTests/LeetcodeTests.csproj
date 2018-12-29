@@ -77,6 +77,7 @@
     <Compile Include="Simples\T70_ClimbStairsTests.cs" />
     <Compile Include="Simples\T733_ProblemsTests.cs" />
     <Compile Include="Simples\T83_DeleteDuplicatesTests.cs" />
+    <Compile Include="Simples\T867_ProblemsTests.cs" />
     <Compile Include="Simples\T88_MergeSortedArraysTests.cs" />
     <Compile Include="TreeHelperTests.cs" />
   </ItemGroup>
