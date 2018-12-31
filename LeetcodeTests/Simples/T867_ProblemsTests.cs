@@ -270,5 +270,268 @@ namespace Leetcode.Simples.Tests
         }
 
         #endregion
+
+        #region T905 tests : 按奇偶排序的数组
+
+        [TestMethod()]
+        public void SortArrayByParityTest_1()
+        {
+            int[] expect = { 2, 4, 3, 1 };
+            Assert.IsTrue(CompareHelper.CompareArrays(expect, t867.SortArrayByParity(new int[] { 3, 1, 2, 4 })));
+        }
+
+        #endregion
+
+        #region T914 tests : 卡牌分组
+
+        [TestMethod()]
+        public void HasGroupsSizeXTest_1()
+        {
+            int[] deck = { 1, 2, 3, 4, 4, 3, 2, 1 };
+            Assert.IsTrue(true == t867.HasGroupsSizeX(deck));
+        }
+
+        [TestMethod()]
+        public void HasGroupsSizeXTest_2()
+        {
+            int[] deck = { 1, 1, 1, 2, 2, 2, 3, 3 };
+            Assert.IsTrue(false == t867.HasGroupsSizeX(deck));
+        }
+
+        [TestMethod()]
+        public void HasGroupsSizeXTest_3()
+        {
+            int[] deck = { 1 };
+            Assert.IsTrue(false == t867.HasGroupsSizeX(deck));
+        }
+
+        [TestMethod()]
+        public void HasGroupsSizeXTest_4()
+        {
+            int[] deck = { 1, 1, 2, 2, 2, 2 };
+            Assert.IsTrue(true == t867.HasGroupsSizeX(deck));
+        }
+
+        [TestMethod()]
+        public void HasGroupsSizeXTest_5()
+        {
+            int[] deck = { };
+            Assert.IsTrue(false == t867.HasGroupsSizeX(deck));
+        }
+
+        #endregion
+
+        #region T917 tests : 仅仅反转字母
+
+        [TestMethod()]
+        public void ReverseOnlyLettersTest_1()
+        {
+            string expect = "j-Ih-gfE-dCba";
+            Assert.IsTrue(expect == t867.ReverseOnlyLetters("a-bC-dEf-ghIj"));
+        }
+
+        [TestMethod()]
+        public void ReverseOnlyLettersTest_2()
+        {
+            string expect = "Test1ng-Leet=code-Q!";
+            Assert.IsTrue(expect == t867.ReverseOnlyLetters("Qedo1ct-eeLg=ntse-T!"));
+        }
+
+
+        #endregion
+
+        #region T922 tests : 按奇偶性排序数组
+
+        [TestMethod()]
+        public void SortArrayByParityIITest_1()
+        {
+            int[] expect = { 4, 5, 2, 7 };
+            Assert.IsTrue(CompareHelper.CompareArrays(expect, t867.SortArrayByParityII(new int[] { 4, 2, 5, 7 })));
+        }
+
+        [TestMethod()]
+        public void SortArrayByParityIITest_2()
+        {
+            int[] expect = { 2, 1, 4, 3, 6, 5, 8, 7 };
+            Assert.IsTrue(CompareHelper.CompareArrays(expect, t867.SortArrayByParityII(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 })));
+        }
+
+        #endregion
+
+        #region T925 tests : 长按键入
+
+        [TestMethod()]
+        public void IsLongPressedNameTest_1()
+        {
+            string name = "alex";
+            string typed = "aaleex";
+            Assert.IsTrue(true == t867.IsLongPressedName(name, typed));
+        }
+
+        [TestMethod()]
+        public void IsLongPressedNameTest_2()
+        {
+            string name = "saeed";
+            string typed = "ssaaedd";
+            Assert.IsTrue(false == t867.IsLongPressedName(name, typed));
+        }
+
+        [TestMethod()]
+        public void IsLongPressedNameTest_3()
+        {
+            string name = "plpkoh";
+            string typed = "plppkkh";
+            Assert.IsTrue(false == t867.IsLongPressedName(name, typed));
+        }
+
+        [TestMethod()]
+        public void IsLongPressedNameTest_4()
+        {
+            string name = "pyplrz";
+            string typed = "ppyypllr";
+            Assert.IsTrue(false == t867.IsLongPressedName(name, typed));
+        }
+
+        #endregion
+
+        #region T929 tests : 独特的电子邮件地址
+
+        [TestMethod()]
+        public void NumUniqueEmailsTest_1()
+        {
+            string[] emails = { "test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" };
+            Assert.IsTrue(2 == t867.NumUniqueEmails(emails));
+        }
+
+        #endregion
+
+        #region T937 tests : 重新排列日志文件
+
+        [TestMethod()]
+        public void ReorderLogFilesTest_1()
+        {
+            string[] logs = { "a1 9 2 3 1", "g1 act car", "zo4 4 7", "ab1 off key dog", "a8 act zoo" };
+            string[] expect = { "g1 act car", "a8 act zoo", "ab1 off key dog", "a1 9 2 3 1", "zo4 4 7" };
+            Assert.IsTrue(CompareHelper.CompareArrays<string>(expect, t867.ReorderLogFiles(logs)));
+        }
+
+        #endregion
+
+        #region T941 tests : 有效的山脉数组
+
+        [TestMethod()]
+        public void ValidMountainArrayTest_1()
+        {
+            int[] A = { 1, 2, 4, 3, 1 };
+            Assert.IsTrue(true == t867.ValidMountainArray(A));
+        }
+
+        [TestMethod()]
+        public void ValidMountainArrayTest_2()
+        {
+            int[] A = { 1, 2, 3, 4 };
+            Assert.IsTrue(false == t867.ValidMountainArray(A));
+        }
+
+        [TestMethod()]
+        public void ValidMountainArrayTest_3()
+        {
+            int[] A = { 4, 3, 2, 1 };
+            Assert.IsTrue(false == t867.ValidMountainArray(A));
+        }
+
+        [TestMethod()]
+        public void ValidMountainArrayTest_4()
+        {
+            int[] A = { 1, 2, 3, 3, 2, 1 };
+            Assert.IsTrue(false == t867.ValidMountainArray(A));
+        }
+
+        #endregion
+
+        #region T944 tests : 删除造序
+
+        [TestMethod()]
+        public void MinDeletionSizeTest_1()
+        {
+            string[] A = { "cba", "daf", "ghi" };
+            Assert.IsTrue(1 == t867.MinDeletionSize(A));
+        }
+
+        [TestMethod()]
+        public void MinDeletionSizeTest_2()
+        {
+            string[] A = { "a", "b" };
+            Assert.IsTrue(0 == t867.MinDeletionSize(A));
+        }
+
+        [TestMethod()]
+        public void MinDeletionSizeTest_3()
+        {
+            string[] A = { "zyx", "wvu", "tsr" };
+            Assert.IsTrue(3 == t867.MinDeletionSize(A));
+        }
+
+        [TestMethod()]
+        public void MinDeletionSizeTest_4()
+        {
+            string[] A = { "rrjk", "furt", "guzm" };
+            Assert.IsTrue(2 == t867.MinDeletionSize(A));
+        }
+
+        #endregion
+
+        #region T949 tests : 给定数字能组成的最大时间
+
+        [TestMethod()]
+        public void LargestTimeFromDigitsTest_1()
+        {
+            int[] A = { 1, 2, 3, 4 };
+            Assert.IsTrue("23:41" == t867.LargestTimeFromDigits(A));
+        }
+
+        [TestMethod()]
+        public void LargestTimeFromDigitsTest_2()
+        {
+            int[] A = { 5, 5, 5, 5 };
+            Assert.IsTrue("" == t867.LargestTimeFromDigits(A));
+        }
+
+        [TestMethod()]
+        public void LargestTimeFromDigitsTest_3()
+        {
+            int[] A = { 0, 0, 0, 0 };
+            Assert.IsTrue("00:00" == t867.LargestTimeFromDigits(A));
+        }
+
+        #endregion
+
+        #region T953 tests : 验证外星语词典
+
+        [TestMethod()]
+        public void IsAlienSortedTest_1()
+        {
+            string[] words = { "hello", "leetcode" };
+            string order = "hlabcdefgijkmnopqrstuvwxyz";
+            Assert.IsTrue(true == t867.IsAlienSorted(words, order));
+        }
+
+        [TestMethod()]
+        public void IsAlienSortedTest_2()
+        {
+            string[] words = { "word", "world", "row" };
+            string order = "worldabcefghijkmnpqstuvxyz";
+            Assert.IsTrue(false == t867.IsAlienSorted(words, order));
+        }
+
+        [TestMethod()]
+        public void IsAlienSortedTest_3()
+        {
+            string[] words = { "fxasxpc", "dfbdrifhp", "nwzgs", "cmwqriv", "ebulyfyve", "miracx", "sxckdwzv", "dtijzluhts", "wwbmnge", "qmjwymmyox" };
+            string order = "zkgwaverfimqxbnctdplsjyohu";
+            Assert.IsTrue(false == t867.IsAlienSorted(words, order));
+        }
+
+        #endregion
     }
 }

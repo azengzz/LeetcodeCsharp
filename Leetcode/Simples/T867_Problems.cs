@@ -341,5 +341,507 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T905 按奇偶排序数组
+
+        public int[] SortArrayByParity(int[] A)
+        {
+            int evenPtr = 0;    //将遍历到的偶数与这个位置上的值交换
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if ((A[i] & 1) == 0)
+                {
+                    int temp = A[i];
+                    A[i] = A[evenPtr];
+                    A[evenPtr] = temp;
+                    evenPtr++;
+                }
+            }
+
+            return A;
+        }
+
+        #endregion
+
+        #region T908 最小差值I
+
+        //如果A的最大最小值之差比2倍K还小，则一定可以在范围内找到一个值使得最大值减去它，最小值加上它之后相等
+        public int SmallestRangeI(int[] A, int K)
+        {
+            int diff = A.Max() - A.Min();
+            return diff > 2 * K ? (diff - 2 * K) : 0;
+        }
+
+        #endregion
+
+        #region T914 卡牌分组
+
+        //找出各卡牌出现频数的最大公约数（gcd）
+        public bool HasGroupsSizeX(int[] deck)
+        {
+            if (deck.Length < 1) return false;
+
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+
+            foreach (int d in deck)
+            {
+                if (numCount.ContainsKey(d)) numCount[d]++;
+                else numCount[d] = 1;
+            }
+
+            int[] frequency = numCount.Values.ToArray();
+            int min = frequency.Min();
+
+            if (min < 2) return false;
+
+            for (int i = 2; i <= min; i++)
+            {
+                bool gcdFlag = true;
+                foreach (int freq in frequency)
+                {
+                    if (freq % i != 0)
+                    {
+                        gcdFlag = false;
+                        break;
+                    }
+                }
+                if (gcdFlag == true) return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region T917 仅仅翻转字母
+
+        public string ReverseOnlyLetters(string S)
+        {
+            StringBuilder res = new StringBuilder();
+            int front = 0;
+            int rear = S.Length - 1;
+
+            while (front < S.Length)
+            {
+                if (!IsAlpha(S[front]))
+                {
+                    res.Append(S[front]);
+                    front++;
+                    continue;
+                }
+
+                while (!IsAlpha(S[rear]))
+                {
+                    rear--;
+                }
+                res.Append(S[rear]);
+                front++;
+                rear--;
+            }
+            return res.ToString();
+        }
+
+        private bool IsAlpha(char ch)
+        {
+            if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) return true;
+            return false;
+        }
+
+        #endregion
+
+        #region T922 按奇偶性排序数组II
+
+        public int[] SortArrayByParityII(int[] A)
+        {
+            List<int> evenIndexes = new List<int>();
+            List<int> oddIndexes = new List<int>();
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                if ((A[i] % 2) != (i % 2))
+                {
+                    if (i % 2 == 0) oddIndexes.Add(i);
+                    else evenIndexes.Add(i);
+                }
+            }
+            for (int i = 0; i < evenIndexes.Count; i++)
+            {
+                int temp = A[evenIndexes[i]];
+                A[evenIndexes[i]] = A[oddIndexes[i]];
+                A[oddIndexes[i]] = temp;
+            }
+
+            return A;
+        }
+
+        #endregion
+
+        #region T925 长按键入
+
+        public bool IsLongPressedName(string name, string typed)
+        {
+            if (name.Length > typed.Length) return false;
+
+            char current = typed[0];
+            int namePtr = 0, typedPtr = 0;
+            int count = 0;
+
+            while (typedPtr <= typed.Length)
+            {
+                if (typedPtr < typed.Length && typed[typedPtr] == current)
+                {
+                    typedPtr++;
+                    count++;
+                }
+                else
+                {
+                    int nCount = 0;
+                    char nCurrent = name[namePtr];
+                    while (namePtr < name.Length)
+                    {
+                        if (name[namePtr] != nCurrent) break;
+                        namePtr++;
+                        nCount++;
+                    }
+
+                    if (nCurrent != current || nCount > count) return false;
+                    else
+                    {
+                        if (typedPtr >= typed.Length) break;
+                        current = typed[typedPtr];
+                        count = 0;
+                    }                    
+                }
+            }
+            if (namePtr < name.Length) return false;
+            return true;
+        }
+
+        #endregion
+
+        #region T929 独特的电子邮件地址
+
+        public int NumUniqueEmails(string[] emails)
+        {
+            Dictionary<string, HashSet<string>> dict = new Dictionary<string, HashSet<string>>();
+
+            foreach (string em in emails)
+            {
+                string[] emSplit = em.Split('@');
+
+                string domain = emSplit[1];
+                string validLocal = emSplit[0].Split('+')[0].Replace(".", "");
+
+                if (dict.ContainsKey(domain))
+                {
+                    if (!dict[domain].Contains(validLocal))
+                        dict[domain].Add(validLocal);
+                }
+                else
+                {
+                    dict[domain] = new HashSet<string> { validLocal };
+                }
+            }
+
+            int total = 0;
+            foreach (var d in dict) total += d.Value.Count;
+
+            return total; 
+        }
+
+        #endregion
+
+        #region T933 最近的请求次数
+
+        public class RecentCounter
+        {
+            private Queue<int> pingTime;
+
+            public RecentCounter()
+            {
+                pingTime = new Queue<int>();
+            }
+
+            public int Ping(int t)
+            {
+                pingTime.Enqueue(t);
+                while (t - pingTime.Peek() > 3000)
+                    pingTime.Dequeue();
+
+                return pingTime.Count;
+            }
+        }
+
+        #endregion
+
+        #region T937 重新排列日志文件
+
+        public string[] ReorderLogFiles(string[] logs)
+        {
+            List<KeyValuePair<string, int>> alphaLogs = new List<KeyValuePair<string, int>>();
+            List<int> numberic = new List<int>();
+
+            for (int i = 0; i < logs.Length; i++)
+            {
+                string log = logs[i];
+                if (log[log.Length-1] >= 'a' && log[log.Length - 1] <= 'z')    //只看最后一个字符即可知是字母日志还是数字日志
+                {
+                    int valid = log.IndexOf(' ') + 1;
+                    alphaLogs.Add(new KeyValuePair<string, int>(logs[i].Substring(valid), i));
+                }
+                else
+                {
+                    numberic.Add(i);
+                }
+            }
+
+            var sorted = alphaLogs.OrderBy(pair => pair.Key);
+            List<string> res = new List<string>();
+            
+            foreach (var pair in sorted)
+            {
+                res.Add(logs[pair.Value]);
+            }
+            foreach (var i in numberic)
+            {
+                res.Add(logs[i]);
+            }
+            return res.ToArray();
+        }
+
+        #endregion
+
+        #region T941 有效的山脉数组
+
+        public bool ValidMountainArray(int[] A)
+        {
+            if (A.Length < 3) return false;
+
+            int peakIndexLeft = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (i != A.Length - 1)
+                {
+                    if (A[i + 1] <= A[i])
+                    {
+                        peakIndexLeft = i;
+                        break;
+                    }
+                    else peakIndexLeft = i;    //最右边的是山脉
+                }
+            }
+
+            int peakIndexRight = A.Length;
+            for (int i = A.Length - 1; i >= 0; i--)
+            {
+                if (i != 0)
+                {
+                    if (A[i] >= A[i - 1])
+                    {
+                        peakIndexRight = i;
+                        break;
+                    }
+                    else peakIndexRight = i;    //最左边是山脉
+                }
+            }
+
+            return peakIndexLeft == peakIndexRight;
+        }
+
+        #endregion
+
+        #region T942 增减字符串匹配
+
+        public int[] DiStringMatch(string S)
+        {
+            List<int> incs = new List<int>();
+            for (int i = S.Length - 1; i >= 0; i--)    //倒序记录增长的位置
+            {
+                if (S[i] == 'I') incs.Add(i + 1);
+            }
+
+            int max = S.Length;
+            int[] res = new int[max + 1];
+            foreach (int n in incs)    //从右到左按递减在增长点放置最大值
+            {
+                res[n] = max;
+                max -= 1;
+            }
+            for (int i = 0; i < S.Length; i++)    //从左到右添加递减点
+            {
+                if (res[i] == 0)
+                {
+                    res[i] = max;
+                    max--;
+                }
+            }
+            return res;
+        }
+
+        #endregion
+
+        #region T944 删除造序
+
+        //题目就是在问有多少列是非升序的 （相邻字母相同也算升序）
+        public int MinDeletionSize(string[] A)
+        {
+            int count = 0;
+
+            for (int i = 0; i < A[0].Length; i++)
+            {
+                for (int j = 0; j < A.Length - 1; j++)
+                {
+                    if (A[j][i] > A[j + 1][i])
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+            return count;
+        }
+
+        #endregion
+
+        #region T949 给定数字能组成的最大时间
+
+        //找出所有可能的组合，然后找出合法的最大值
+        public string LargestTimeFromDigits(int[] A)
+        {
+            Queue<List<int>> queue = new Queue<List<int>>();
+
+            for (int i = 0; i < A.Length; i++)
+            {
+                List<int> lst = new List<int>() { i };    //记录下标
+                queue.Enqueue(lst);
+            }
+
+            //只记录所有组合在A中的下标
+            for (int t = 0; t < A.Length - 1; t++)
+            {
+                int count = queue.Count;
+                while (count > 0)
+                {
+                    List<int> deq = queue.Dequeue();
+                    for (int i = 0; i < A.Length; i++)
+                    {
+                        if (!deq.Contains(i))
+                        {
+                            List<int> tmp = new List<int>();
+                            foreach (int v in deq) tmp.Add(v);
+                            tmp.Add(i);
+                            queue.Enqueue(tmp);
+                        }
+                    }
+                    --count;
+                }
+            }
+
+            //从下标组合中还原出所有的组合，并找合法的最大值
+            int validMax = -1;
+            while (queue.Count > 0)
+            {
+                List<int> lst = queue.Dequeue();
+                int[] arr = new int[] { A[lst[0]], A[lst[1]], A[lst[2]], A[lst[3]] };
+                int val = checkTime(arr);
+                if (val > validMax) validMax = val;
+            }
+
+            //拼接出结果
+            if (validMax != -1)
+            {
+                char[] res = new char[5];
+                for (int i = res.Length - 1; i >= 0; i--)
+                {
+                    if (i == 2) res[i] = ':';
+                    else
+                    {
+                        res[i] = (char)(validMax % 10 + '0');
+                        validMax = validMax / 10;
+                    }
+                }
+                return new string(res);
+            }
+            return "";
+        }
+
+        int checkTime(int[] arr)
+        {
+            bool flag = false;
+
+            if (arr[0] >= 0 && arr[0] < 2)
+            {
+                if (arr[2] >= 0 && arr[2] <= 5)
+                    flag = true;
+            }
+            else if (arr[0] == 2)
+            {
+                if (arr[1] >= 0 && arr[1] <= 3 && arr[2] >= 0 && arr[2] <= 5)
+                    flag = true;
+            }
+
+            if (flag) return arr[0] * 1000 + arr[1] * 100 + arr[2] * 10 + arr[3];
+            else return -1;
+        }
+
+        #endregion
+
+        #region T953 验证外星语词典
+
+        public bool IsAlienSorted(string[] words, string order)
+        {
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            for (int i = 0; i < order.Length; i++)
+            {
+                dict.Add(order[i], i);
+            }
+
+            for (int i = 0; i < words.Length - 1; i++)
+            {
+                if (!CompareAlienWords(words[i], words[i + 1], dict))
+                    return false;
+            }
+            return true;
+        }
+
+        private bool CompareAlienWords(string word1, string word2, Dictionary<char, int> order)
+        {
+            int minLength = word1.Length <= word2.Length ? word1.Length : word2.Length;
+
+            int j = 0;
+            for (j = 0; j < minLength; j++)
+            {
+                if (order[word1[j]] < order[word2[j]])
+                {
+                    return true;
+                }
+                else if (order[word1[j]] > order[word2[j]])
+                {
+                    return false;
+                }
+            }
+            if (word1.Length <= word2.Length) return true;
+            return false;
+        }
+
+        #endregion
+
+        #region T961 重复N次的元素
+
+        //甚至不需要全部遍历完，只要发现有一个元素出现2次，就返回它
+        public int RepeatedNTimes(int[] A)
+        {
+            HashSet<int> elements = new HashSet<int>();
+
+            foreach (int n in A)
+            {
+                if (elements.Contains(n)) return n;
+                elements.Add(n);
+            }
+
+            return -1;
+        }
+
+        #endregion
     }
 }
