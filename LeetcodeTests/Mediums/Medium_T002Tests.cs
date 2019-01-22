@@ -13,7 +13,7 @@ namespace Leetcode.Mediums.Tests
     {
         public Medium_T002 m02 = new Medium_T002();
 
-        #region M02 tests : 两数相加
+        #region T02 tests : 两数相加
 
         [TestMethod()]
         public void AddTwoNumbersTest_1()
@@ -41,6 +41,46 @@ namespace Leetcode.Mediums.Tests
             int[] res = ListNodeHelper.GetElementsFromLinkedList(m02.AddTwoNumbers(lst1, lst2));
 
             Assert.IsTrue(CompareHelper.CompareArrays(expect, res));
+        }
+
+
+        #endregion
+
+        #region T03 tests : 无重复字符从最长子串长度
+
+        [TestMethod()]
+        public void LengthOfLongestSubstringTest_1()
+        {
+            string s = "abcabcbbefg";
+            Assert.IsTrue(4 == m02.LengthOfLongestSubstring(s));
+        }
+
+        [TestMethod()]
+        public void LengthOfLongestSubstringTest_2()
+        {
+            string s = "bbbbbb";
+            Assert.IsTrue(1 == m02.LengthOfLongestSubstring(s));
+        }
+
+        [TestMethod()]
+        public void LengthOfLongestSubstringTest_3()
+        {
+            string s = "pwwkew";
+            Assert.IsTrue(3 == m02.LengthOfLongestSubstring(s));
+        }
+
+        [TestMethod()]
+        public void LengthOfLongestSubstringTest_4()
+        {
+            string s = "abba";
+            Assert.IsTrue(2 == m02.LengthOfLongestSubstring(s));
+        }
+
+        [TestMethod()]
+        public void LengthOfLongestSubstringTest_5()
+        {
+            string s = "dvdf";
+            Assert.IsTrue(3 == m02.LengthOfLongestSubstring(s));
         }
 
         #endregion

@@ -843,5 +843,108 @@ namespace Leetcode.Simples
         }
 
         #endregion
+
+        #region T965 单值二叉树
+
+        public bool IsUnivalTree(TreeNode root)
+        {
+            if (root == null) return false;
+
+            return CompareNodeVal(root, root.val);
+        }
+
+        private bool CompareNodeVal(TreeNode node, int val)
+        {
+            if (node == null)
+            {
+                return true;
+            }
+
+            if (node.val == val)
+            {
+                return CompareNodeVal(node.left, val) && CompareNodeVal(node.right, val);
+            }
+
+            return false;
+        }
+
+        #endregion
+
+        #region T970 强整数
+
+        public IList<int> PowerfulIntegers(int x, int y, int bound)
+        {
+
+            HashSet<int> res = new HashSet<int>();
+
+            for (int i = 0; i < 18 && (int)Math.Pow(x, i) <= bound; ++i)
+            {
+                for (int j = 0; j < 18 && (int)Math.Pow(y, j) <= bound; ++j)
+                {
+                    int val = (int)Math.Pow(x, i) + (int)Math.Pow(y, j);
+                    if (val <= bound)
+                        res.Add(val);
+                }
+            }
+
+            return res.ToList();
+        }
+
+        #endregion
+
+        #region T973 最接近原点的K个点
+
+        public int[][] KClosest(int[][] points, int K)
+        {
+
+            int[] distances = new int[points.Length];
+
+            for (int i = 0; i < points.Length; i++)
+            {
+                distances[i] = Distance(points[i][0], points[i][1]);
+            }
+
+            Array.Sort(distances);
+
+            int distance_K = distances[K - 1];
+            int[][] res = new int[K][];
+            int count = 0;
+
+            for (int i = 0; i < distances.Length; i++)
+            {
+                if (Distance(points[i][0], points[i][1]) <= distance_K)
+                {
+                    res[count++] = points[i];
+                }
+            }
+
+            return res;
+        }
+
+        private int Distance(int x, int y)
+        {
+            return x * x + y * y;
+        }
+
+        #endregion
+
+        #region T976 三角形的最大周长
+
+        public int LargestPerimeter(int[] A)
+        {
+            Array.Sort(A);
+
+            for (int i = A.Length - 3; i >= 0; i--)
+            {
+                if (A[i] + A[i + 1] > A[i + 2])
+                {
+                    return A[i] + A[i + 1] + A[i + 2];
+                }
+            }
+
+            return 0;
+        }
+
+        #endregion
     }
 }

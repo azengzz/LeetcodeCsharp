@@ -80,5 +80,74 @@ namespace Leetcode.Mediums
         }
 
         #endregion
+
+        #region T03 无重复字符的最长子串
+
+        public int LengthOfLongestSubstring(string s)
+        {
+            Dictionary<char, int> charLastIndex = new Dictionary<char, int>();
+            int dontCare = 0;
+            int counter = 0;
+            int max = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (charLastIndex.ContainsKey(s[i]))
+                {
+                    if (counter > max) max = counter;
+
+                    dontCare = charLastIndex[s[i]] > dontCare ? charLastIndex[s[i]] : dontCare;
+                    counter = i - dontCare;                    
+                }
+                else
+                {
+                    counter++;
+                }
+                charLastIndex[s[i]] = i;
+            }
+
+            return max >= counter ? max : counter;
+        }
+
+        #endregion
+
+        #region T05 最长回文子串
+
+        public string LongestPalindrome(string s)
+        {
+            if (s == null || s.Length == 0) return "";
+
+            int start = 0, end = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                int len1 = ExpandAroundCenter(s, i, i);
+                int len2 = ExpandAroundCenter(s, i, i + 1);
+
+                int len = Math.Max(len1, len2);
+                if (len > end - start)
+                {
+                    start = i - (len - 1) / 2;
+                    end = i + len / 2;
+                }
+            }
+
+            return s.Substring(start, end - start + 1);
+        }
+
+        private int ExpandAroundCenter(string s, int start, int end)
+        {
+            while (start >= 0 && end < s.Length)
+            {
+                if (s[start] != s[end]) break;
+
+                --start;
+                ++end;
+            }
+
+            return end - start - 1;
+        }
+
+        #endregion
     }
 }
