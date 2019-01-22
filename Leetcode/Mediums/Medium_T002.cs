@@ -149,5 +149,64 @@ namespace Leetcode.Mediums
         }
 
         #endregion
+
+        #region T06 Z字形变换
+
+        public string Convert(string s, int numRows)
+        {
+            if (numRows < 2) return s;
+
+            Dictionary<int, StringBuilder> dict = new Dictionary<int, StringBuilder>();
+
+            bool up = true;
+            bool down = false;
+            int count = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (up)
+                {
+                    ++count;
+                    if (!dict.ContainsKey(count))
+                    {
+                        dict[count] = new StringBuilder();
+                    }
+                    dict[count].Append(s[i]);
+
+                    if (count >= numRows)
+                    {
+                        count = numRows;
+                        up = false;
+                        down = true;
+                    }
+                }
+                else if (down)
+                {
+                    --count;
+                    if (!dict.ContainsKey(count))
+                    {
+                        dict[count] = new StringBuilder();
+                    }
+                    dict[count].Append(s[i]);
+
+                    if (count <= 1)
+                    {
+                        count = 1;
+                        up = true;
+                        down = false;
+                    }
+                }
+            }
+
+            StringBuilder res = new StringBuilder();
+            for (int i = 1; i <= numRows && dict.ContainsKey(i); i++)
+            {
+                res.Append(dict[i]);
+            }
+
+            return res.ToString();
+        }
+
+        #endregion
     }
 }

@@ -84,5 +84,21 @@ namespace Leetcode.Mediums.Tests
         }
 
         #endregion
+
+        #region T06 tests : Z字形变换
+
+        [TestMethod()]
+        public void ConvertTest_01()
+        {
+            Assert.IsTrue("LDREOEIIECIHNTSG" == m02.Convert("LEETCODEISHIRING", 4));
+        }
+
+        [TestMethod()]
+        public void ConvertTest_02()
+        {
+            Assert.IsTrue("LEETCODEISHIRING" == m02.Convert("LEETCODEISHIRING", 100));
+        }
+
+        #endregion
     }
 }
